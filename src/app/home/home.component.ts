@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HeroComponent } from '../hero/hero.component';
+import { AboutComponent } from '../about/about.component';
+import { SkillsComponent, Skill } from '../skills/skills.component';
+import { ExperienceComponent } from '../experience/experience.component';
 import { ProjectsComponent } from '../projects/projects.component';
-
-interface Skill {
-  name: string;
-  years: number;
-  category: 'language' | 'framework' | 'cloud' | 'database' | 'tool';
-}
 
 interface Experience {
   startDate: Date;
@@ -17,7 +15,7 @@ interface Experience {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ProjectsComponent, CommonModule],
+  imports: [HeroComponent, AboutComponent, SkillsComponent, ExperienceComponent, ProjectsComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -71,6 +69,10 @@ export class HomeComponent implements OnInit {
     });
 
     this.skills = skills;
+  }
+
+  onSkillFilterChanged(skillName: string | null): void {
+    this.selectedSkillFilter = skillName;
   }
 
   calculateTotalYears(periods: { start: Date, end: Date }[]): number {
