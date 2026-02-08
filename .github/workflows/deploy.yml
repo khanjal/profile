@@ -26,6 +26,12 @@ jobs:
       - name: Build
         run: npm run build -- --configuration production --base-href "/profile/"
 
+      - name: Ensure index.html exists for Pages
+        run: |
+          if [ -f ./dist/profile-site/browser/index.csr.html ] && [ ! -f ./dist/profile-site/browser/index.html ]; then
+            cp ./dist/profile-site/browser/index.csr.html ./dist/profile-site/browser/index.html
+          fi
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
