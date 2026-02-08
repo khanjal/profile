@@ -206,7 +206,9 @@
     "endDate": "2004-04-30",
     "skills": [
       { "name": "ASP" },
-      { "name": "PHP" }
+      { "name": "PHP" },
+      { "name": "SQL" },
+      { "name": "MS SQL" }
     ]
   }
 ]
