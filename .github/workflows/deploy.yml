@@ -31,6 +31,11 @@ jobs:
           if [ -f ./dist/profile-site/browser/index.csr.html ] && [ ! -f ./dist/profile-site/browser/index.html ]; then
             cp ./dist/profile-site/browser/index.csr.html ./dist/profile-site/browser/index.html
           fi
+      - name: Ensure 404.html exists for SPA routing
+        run: |
+          if [ -f ./dist/profile-site/browser/index.csr.html ] && [ ! -f ./dist/profile-site/browser/404.html ]; then
+            cp ./dist/profile-site/browser/index.csr.html ./dist/profile-site/browser/404.html
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
