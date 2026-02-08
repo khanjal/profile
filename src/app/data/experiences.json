@@ -8,9 +8,17 @@
     "endDate": null,
     "skills": [
       { "name": "C#" },
+      { "name": "SQL" },
       { "name": "Angular" },
       { "name": "AWS" },
-      { "name": "DynamoDB" }
+      { "name": "DynamoDB" },
+      { "name": "MS SQL" },
+      { "name": "S3" },
+      { "name": "API Gateway" },
+      { "name": "CloudWatch" },
+      { "name": "AWS Bedrock" },
+      { "name": "GitHub Copilot" },
+      { "name": "Claude" }
     ]
   },
   {
@@ -28,7 +36,12 @@
       { "name": "DynamoDB" },
       { "name": "Lambda" },
       { "name": "Alexa Skills" },
-      { "name": "Git" }
+      { "name": "Git" },
+      { "name": "S3" },
+      { "name": "API Gateway" },
+      { "name": "CloudWatch" },
+      { "name": "Tailwind" },
+      { "name": "GitHub Copilot" }
     ]
   },
   {
@@ -41,8 +54,10 @@
     "skills": [
       { "name": "C#" },
       { "name": "Angular" },
+      { "name": "Bootstrap" },
       { "name": "Microservices" },
       { "name": "REST APIs" },
+      { "name": "SOAP" },
       { "name": "SQL" },
       { "name": "MS SQL" },
       { "name": "Azure" },
@@ -59,6 +74,7 @@
     "skills": [
       { "name": "C#" },
       { "name": "Angular" },
+      { "name": "Bootstrap" },
       { "name": "JavaScript" },
       { "name": "REST APIs" },
       { "name": "SQL" },
@@ -76,6 +92,7 @@
     "endDate": "2013-10-31",
     "skills": [
       { "name": "ASP.NET MVC" },
+      { "name": "Bootstrap" },
       { "name": "JavaScript" },
       { "name": "SQL" },
       { "name": "MS SQL" },
@@ -111,7 +128,8 @@
       { "name": "SQL" },
       { "name": "MS SQL" },
       { "name": "XML" },
-      { "name": "BizTalk" }
+      { "name": "BizTalk" },
+      { "name": "SVN" }
     ]
   },
   {
@@ -141,6 +159,7 @@
       { "name": "C#" },
       { "name": "SQL" },
       { "name": "MS SQL" },
+      { "name": "Crystal Reports" },
       { "name": "SSRS" }
     ]
   },

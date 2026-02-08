@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AboutComponent } from '../about/about.component';
 import { SkillsComponent, Skill } from '../skills/skills.component';
 import { ExperienceComponent } from '../experience/experience.component';
+import { Certifications } from '../certifications/certifications';
 import { ProjectsComponent } from '../projects/projects.component';
 import experiencesData from '../data/experiences.json';
 import skillsData from '../data/skills.json';
@@ -27,7 +28,7 @@ interface SkillEntry {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AboutComponent, SkillsComponent, ExperienceComponent, ProjectsComponent, CommonModule],
+  imports: [AboutComponent, SkillsComponent, ExperienceComponent, Certifications, ProjectsComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
