@@ -1,31 +1,44 @@
-<!-- Who Am I Section -->
+<!-- Hero + About Section -->
 <section id="about" class="section bg-secondary/30">
-  <div class="container-custom">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div class="space-y-6">
-        <h2 class="section-title">WHO AM I?</h2>
-        <p class="text-text-secondary text-lg leading-relaxed">
-          Software engineer with expertise in modern web technologies.
-          Passionate about building scalable applications and solving complex problems.
-          Experienced in full-stack development with a focus on creating exceptional user experiences.
-        </p>
-        <p class="text-text-secondary text-lg leading-relaxed">
-          Team player with excellent communication skills, always eager to learn new technologies
-          and share knowledge with others.
-        </p>
-      </div>
-      
-      <div class="flex justify-center">
-        <div class="w-64 h-64 rounded-full bg-gradient-accent p-1 shadow-glow-lg">
-          <div class="w-full h-full rounded-full bg-secondary overflow-hidden">
-            <img 
-              src="/profile.jpg" 
-              alt="Justin Harding" 
-              class="w-full h-full object-cover rounded-full"
-            />
+  <div class="w-full px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid md:grid-cols-3 gap-12 items-start">
+        <div class="md:col-span-2">
+          <div class="code-block p-6 sm:p-8 md:p-12 animate-slide-up max-w-none">
+            <pre class="w-full text-text-secondary text-xs sm:text-sm md:text-base lg:text-lg whitespace-pre-wrap break-words"><code>
+<span class="text-accent-purple">const</span> <span class="text-accent-blue">softwareEngineer</span> <span class="text-text-primary">=</span> &#123;
+  <span class="text-accent-cyan">name:</span> <span class="text-accent-green">'Justin Harding'</span>,
+  <span class="text-accent-cyan">expertise:</span> <span class="text-accent-green">'Full Stack Developer | Solutions Expert | Natural Mentor'</span>,
+  <span class="text-accent-cyan">about:</span> &#123;
+    <span class="text-accent-cyan">description:</span> <span class="text-accent-green">'Software engineer with expertise in modern web technologies.'</span>,
+    <span class="text-accent-cyan">focus:</span> <span class="text-accent-green">'Building scalable applications and solving complex problems.'</span>,
+    <span class="text-accent-cyan">approach:</span> <span class="text-accent-green">'Full-stack development with a focus on exceptional user experiences.'</span>,
+    <span class="text-accent-cyan">traits:</span> <span class="text-accent-green">'Team player, strong communicator, lifelong learner.'</span>,
+  &#125;,
+  <span class="text-accent-cyan">skills:</span> [<span class="text-accent-green">'C#'</span>, <span class="text-accent-green">'Angular'</span>, <span class="text-accent-green">'AWS'</span>, <span class="text-accent-green">'TypeScript'</span>, <span class="text-accent-green">'SQL'</span>],
+  <span class="text-accent-cyan">projects:</span> [
+    <span class="text-accent-green">'Enterprise microservices'</span>,
+    <span class="text-accent-green">'Serverless integrations'</span>,
+    <span class="text-accent-green">'Custom Alexa skills'</span>
+  ],
+&#125;;
+</code></pre>
+          </div>
+        </div>
+
+        <div class="flex justify-center md:justify-end">
+          <div class="w-64 h-64 rounded-full bg-gradient-accent p-1 shadow-glow-lg">
+            <div class="w-full h-full rounded-full bg-secondary overflow-hidden">
+              <img 
+                src="/profile.jpg" 
+                alt="Justin Harding" 
+                class="w-full h-full object-cover rounded-full"
+              />
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+

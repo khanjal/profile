@@ -1,41 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeroComponent } from '../hero/hero.component';
 import { AboutComponent } from '../about/about.component';
 import { SkillsComponent, Skill } from '../skills/skills.component';
 import { ExperienceComponent } from '../experience/experience.component';
 import { ProjectsComponent } from '../projects/projects.component';
+import experiencesData from '../data/experiences.json';
+import skillsData from '../data/skills.json';
 
-interface Experience {
-  startDate: Date;
-  endDate: Date | null; // null means present
-  skills: string[];
+interface ExperienceEntry {
+  startDate: string;
+  endDate: string | null; // null means present
+  skills: SkillUsage[];
+}
+
+interface SkillUsage {
+  name: string;
+  startDate?: string | null;
+  endDate?: string | null;
+}
+
+interface SkillEntry {
+  name: string;
+  category: Skill['category'];
 }
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeroComponent, AboutComponent, SkillsComponent, ExperienceComponent, ProjectsComponent, CommonModule],
+  imports: [AboutComponent, SkillsComponent, ExperienceComponent, ProjectsComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   selectedSkillFilter: string | null = null;
 
-  experiences: Experience[] = [
-    { startDate: new Date('2024-01-01'), endDate: null, skills: ['C#', 'Angular', 'AWS'] },
-    { startDate: new Date('2013-04-01'), endDate: null, skills: ['C#', 'TypeScript', 'Angular', 'AWS', 'Lambda', 'Alexa Skills', 'Git'] },
-    { startDate: new Date('2018-12-01'), endDate: new Date('2023-08-31'), skills: ['C#', 'Angular', 'Microservices', 'REST APIs', 'SQL', 'Azure', 'GitHub Actions'] },
-    { startDate: new Date('2013-10-01'), endDate: new Date('2018-11-30'), skills: ['C#', 'Angular', 'JavaScript', 'REST APIs', 'SQL', 'TeamCity', 'Octopus Deploy'] },
-    { startDate: new Date('2012-09-01'), endDate: new Date('2013-10-31'), skills: ['ASP.NET MVC', 'JavaScript', 'SQL', 'SCRUM'] },
-    { startDate: new Date('2010-10-01'), endDate: new Date('2012-08-31'), skills: ['C#', 'JavaScript', 'jQuery', 'AJAX', 'MySQL'] },
-    { startDate: new Date('2008-11-01'), endDate: new Date('2010-09-30'), skills: ['VB.NET', 'JavaScript', 'SQL', 'XML', 'BizTalk'] },
-    { startDate: new Date('2008-07-01'), endDate: new Date('2008-10-31'), skills: ['JavaScript', 'C#', 'SQL'] },
-    { startDate: new Date('2007-05-01'), endDate: new Date('2008-06-30'), skills: ['ASP.NET', 'PHP', 'SQL', 'C#', 'SSRS'] },
-    { startDate: new Date('2005-04-01'), endDate: new Date('2007-05-31'), skills: ['ASP.NET', 'VB.NET', 'Perl', 'JavaScript', 'C#', 'SQL', 'VB'] },
-    { startDate: new Date('2004-04-01'), endDate: new Date('2005-04-30'), skills: ['PHP', 'PostgreSQL', 'MySQL', 'SQL'] },
-    { startDate: new Date('2001-06-01'), endDate: new Date('2004-04-30'), skills: ['ASP', 'PHP'] },
-  ];
+  private experienceEntries: ExperienceEntry[] = experiencesData as ExperienceEntry[];
+  private skillEntries: SkillEntry[] = skillsData as SkillEntry[];
+  private skillCategoryMap = new Map(
+    this.skillEntries.map(entry => [entry.name, entry.category])
+  );
 
   skills: Skill[] = [];
 
@@ -47,25 +50,46 @@ export class HomeComponent implements OnInit {
     const skillMap = new Map<string, { periods: { start: Date, end: Date }[], category: string }>();
     
     // Collect all periods for each skill
-    this.experiences.forEach(exp => {
-      const endDate = exp.endDate || new Date();
+    this.experienceEntries.forEach(exp => {
+      const jobStart = new Date(exp.startDate);
+      const jobEnd = exp.endDate ? new Date(exp.endDate) : new Date();
+
       exp.skills.forEach(skill => {
-        if (!skillMap.has(skill)) {
-          skillMap.set(skill, { periods: [], category: this.getSkillCategory(skill) });
+        const skillStart = skill.startDate ? new Date(skill.startDate) : jobStart;
+        const skillEnd = skill.endDate ? new Date(skill.endDate) : jobEnd;
+
+        if (!skillMap.has(skill.name)) {
+          skillMap.set(skill.name, { periods: [], category: this.getSkillCategory(skill.name) });
         }
-        skillMap.get(skill)!.periods.push({ start: exp.startDate, end: endDate });
+        skillMap.get(skill.name)!.periods.push({ start: skillStart, end: skillEnd });
       });
     });
 
     // Calculate total years for each skill, merging overlapping periods
     const skills: Skill[] = [];
+    const skillLookup = new Map<string, Skill>();
+
     skillMap.forEach((data, skillName) => {
       const totalYears = this.calculateTotalYears(data.periods);
-      skills.push({
+      const skill: Skill = {
         name: skillName,
         years: totalYears,
-        category: data.category as any
-      });
+        category: data.category as Skill['category']
+      };
+      skills.push(skill);
+      skillLookup.set(skillName, skill);
+    });
+
+    this.skillEntries.forEach(entry => {
+      if (!skillLookup.has(entry.name)) {
+        const skill: Skill = {
+          name: entry.name,
+          years: 0,
+          category: entry.category
+        };
+        skills.push(skill);
+        skillLookup.set(entry.name, skill);
+      }
     });
 
     this.skills = skills;
@@ -108,61 +132,7 @@ export class HomeComponent implements OnInit {
   }
 
   getSkillCategory(skillName: string): string {
-    const categories: { [key: string]: string } = {
-      'C#': 'language',
-      'JavaScript': 'language',
-      'TypeScript': 'language',
-      'VB.NET': 'language',
-      'VB': 'language',
-      'PHP': 'language',
-      'Perl': 'language',
-      'ASP': 'language',
-      'SQL': 'database',
-      'MySQL': 'database',
-      'PostgreSQL': 'database',
-      'Angular': 'framework',
-      'jQuery': 'framework',
-      'ASP.NET MVC': 'framework',
-      'ASP.NET': 'framework',
-      'AWS': 'cloud',
-      'Azure': 'cloud',
-      'Lambda': 'cloud',
-      'REST APIs': 'tool',
-      'Microservices': 'tool',
-      'Git': 'tool',
-      'TeamCity': 'tool',
-      'Octopus Deploy': 'tool',
-      'SCRUM': 'tool',
-      'GitHub Actions': 'tool',
-      'Alexa Skills': 'tool',
-      'AJAX': 'tool',
-      'XML': 'tool',
-      'BizTalk': 'tool',
-      'SSRS': 'tool',
-    };
-    return categories[skillName] || 'tool';
+    return this.skillCategoryMap.get(skillName) || 'tool';
   }
 
-  get sortedSkills(): Skill[] {
-    return [...this.skills].sort((a, b) => b.years - a.years);
-  }
-
-  filterBySkill(skillName: string | null): void {
-    this.selectedSkillFilter = this.selectedSkillFilter === skillName ? null : skillName;
-  }
-
-  isSkillActive(skillName: string): boolean {
-    return this.selectedSkillFilter === null || this.selectedSkillFilter === skillName;
-  }
-
-  isSkillSelected(skillName: string): boolean {
-    return this.selectedSkillFilter === skillName;
-  }
-
-  shouldShowExperience(experienceSkills: string[]): boolean {
-    if (!this.selectedSkillFilter) {
-      return true;
-    }
-    return experienceSkills.includes(this.selectedSkillFilter);
-  }
 }

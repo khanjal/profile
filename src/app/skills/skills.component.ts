@@ -19,8 +19,45 @@ export class SkillsComponent {
   @Input() selectedSkillFilter: string | null = null;
   @Output() skillFilterChanged = new EventEmitter<string | null>();
 
-  get sortedSkills(): Skill[] {
-    return [...this.skills].sort((a, b) => b.years - a.years);
+  private categoryOrder: Skill['category'][] = [
+    'language',
+    'framework',
+    'cloud',
+    'database',
+    'tool'
+  ];
+
+  get groupedSkills(): { category: Skill['category']; skills: Skill[] }[] {
+    const grouped = new Map<Skill['category'], Skill[]>();
+
+    this.skills.forEach(skill => {
+      const list = grouped.get(skill.category) || [];
+      list.push(skill);
+      grouped.set(skill.category, list);
+    });
+
+    return this.categoryOrder
+      .map(category => ({
+        category,
+        skills: (grouped.get(category) || []).sort((a, b) => b.years - a.years)
+      }))
+      .filter(group => group.skills.length > 0);
+  }
+
+  getCategoryLabel(category: Skill['category']): string {
+    switch (category) {
+      case 'language':
+        return 'Languages';
+      case 'framework':
+        return 'Frameworks';
+      case 'cloud':
+        return 'Cloud';
+      case 'database':
+        return 'Databases';
+      case 'tool':
+      default:
+        return 'Tools';
+    }
   }
 
   filterBySkill(skillName: string | null): void {

@@ -14,11 +14,20 @@
               </div>
               <span class="text-text-muted">{{ job.dateRange }}</span>
             </div>
-            <div class="flex flex-wrap gap-2 mt-4">
-              @for (skill of job.skills; track skill) {
-                <span class="skill-badge">
-                  <span class="text-accent">●</span> {{ skill }}
-                </span>
+            <div class="mt-4 space-y-4">
+              @for (group of getGroupedSkills(job.skills); track group.category) {
+                <div>
+                  <div class="text-xs uppercase tracking-[0.3em] text-text-muted mb-2">
+                    {{ getCategoryLabel(group.category) }}
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    @for (skill of group.skills; track skill.name) {
+                      <span class="skill-badge">
+                        <span class="text-accent">●</span> {{ skill.name }}
+                      </span>
+                    }
+                  </div>
+                </div>
               }
             </div>
           </div>
