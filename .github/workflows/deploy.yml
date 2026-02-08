@@ -16,8 +16,8 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies (production only)
-        run: npm ci --omit=dev
+      - name: Install dependencies (allow legacy peer deps)
+        run: npm ci --legacy-peer-deps
 
       - name: Build
         run: npm run build -- --configuration production --base-href "/profile/"
