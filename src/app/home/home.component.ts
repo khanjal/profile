@@ -49,6 +49,8 @@ export class HomeComponent implements OnInit {
 
   calculateSkillYears(): void {
     const skillMap = new Map<string, { periods: { start: Date, end: Date }[], category: string }>();
+    const cutoff = new Date();
+    cutoff.setFullYear(cutoff.getFullYear() - 10); // only consider skill usage in the last 10 years
     
     // Collect all periods for each skill
     this.experienceEntries.forEach(exp => {
@@ -56,8 +58,17 @@ export class HomeComponent implements OnInit {
       const jobEnd = exp.endDate ? new Date(exp.endDate) : new Date();
 
       exp.skills.forEach(skill => {
-        const skillStart = skill.startDate ? new Date(skill.startDate) : jobStart;
-        const skillEnd = skill.endDate ? new Date(skill.endDate) : jobEnd;
+        let skillStart = skill.startDate ? new Date(skill.startDate) : jobStart;
+        let skillEnd = skill.endDate ? new Date(skill.endDate) : jobEnd;
+
+        // Intersect with cutoff to only count recent usage
+        if (skillEnd <= cutoff) {
+          // entirely before cutoff, ignore
+          return;
+        }
+        if (skillStart < cutoff) {
+          skillStart = cutoff;
+        }
 
         if (!skillMap.has(skill.name)) {
           skillMap.set(skill.name, { periods: [], category: this.getSkillCategory(skill.name) });
