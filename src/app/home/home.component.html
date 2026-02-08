@@ -1,26 +1,10 @@
 <app-about></app-about>
-
-<!-- Skills + Experience: side-by-side on wide screens -->
-<section class="section">
-  <div class="container-custom">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-      <aside class="lg:sticky lg:top-20">
-        <div class="lg:max-h-[70vh] lg:overflow-auto lg:pr-2">
-          <app-skills
-            [skills]="skills"
-            [selectedSkillFilter]="selectedSkillFilter"
-            (skillFilterChanged)="onSkillFilterChanged($event)">
-          </app-skills>
-        </div>
-      </aside>
-
-      <div>
-        <app-experience [selectedSkillFilter]="selectedSkillFilter"></app-experience>
-      </div>
-    </div>
-  </div>
-</section>
-
+<app-skills 
+  [skills]="skills" 
+  [selectedSkillFilter]="selectedSkillFilter"
+  (skillFilterChanged)="onSkillFilterChanged($event)">
+</app-skills>
+<app-experience [selectedSkillFilter]="selectedSkillFilter"></app-experience>
 <app-certifications></app-certifications>
 
 <!-- Projects Section -->
