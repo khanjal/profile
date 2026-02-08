@@ -21,7 +21,7 @@ interface SkillUsage {
 
 interface SkillEntry {
   name: string;
-  category: 'language' | 'framework' | 'cloud' | 'database' | 'tool';
+  category: 'language' | 'framework' | 'cloud' | 'database' | 'concept' | 'utility';
 }
 
 @Component({
@@ -44,7 +44,7 @@ export class ExperienceComponent {
     'framework',
     'cloud',
     'database',
-    'tool'
+    'concept'
   ];
 
   shouldShowExperience(experienceSkills: SkillUsage[]): boolean {
@@ -64,17 +64,21 @@ export class ExperienceComponent {
         return 'Cloud';
       case 'database':
         return 'Databases';
-      case 'tool':
+      case 'concept':
+        return 'Concepts & Patterns';
+      case 'utility':
       default:
-        return 'Tools';
+        return 'Utilities';
     }
   }
 
   getGroupedSkills(skills: SkillUsage[]): { category: SkillEntry['category']; skills: SkillUsage[] }[] {
     const grouped = new Map<SkillEntry['category'], SkillUsage[]>();
 
+    // Filter out utility category from experience display
     skills.forEach(skill => {
-      const category = this.skillCategoryMap.get(skill.name) || 'tool';
+      const category = this.skillCategoryMap.get(skill.name) || 'concept';
+      if (category === 'utility') return; // Skip utilities
       const list = grouped.get(category) || [];
       list.push(skill);
       grouped.set(category, list);

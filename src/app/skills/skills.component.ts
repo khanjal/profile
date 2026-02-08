@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 export interface Skill {
   name: string;
   years: number;
-  category: 'language' | 'framework' | 'cloud' | 'database' | 'tool';
+  category: 'language' | 'framework' | 'cloud' | 'database' | 'concept' | 'utility';
 }
 
 @Component({
@@ -24,13 +24,14 @@ export class SkillsComponent {
     'framework',
     'cloud',
     'database',
-    'tool'
+    'concept'
   ];
 
   get groupedSkills(): { category: Skill['category']; skills: Skill[] }[] {
     const grouped = new Map<Skill['category'], Skill[]>();
 
-    this.skills.forEach(skill => {
+    // Exclude utility category from main skills display
+    this.skills.filter(skill => skill.category !== 'utility').forEach(skill => {
       const list = grouped.get(skill.category) || [];
       list.push(skill);
       grouped.set(skill.category, list);
@@ -44,6 +45,12 @@ export class SkillsComponent {
       .filter(group => group.skills.length > 0);
   }
 
+  get utilitySkills(): Skill[] {
+    return this.skills
+      .filter(skill => skill.category === 'utility')
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }
+
   getCategoryLabel(category: Skill['category']): string {
     switch (category) {
       case 'language':
@@ -54,9 +61,11 @@ export class SkillsComponent {
         return 'Cloud';
       case 'database':
         return 'Databases';
-      case 'tool':
+      case 'concept':
+        return 'Concepts & Patterns';
+      case 'utility':
       default:
-        return 'Tools';
+        return 'Technologies Used';
     }
   }
 

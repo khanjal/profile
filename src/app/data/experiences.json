@@ -80,7 +80,8 @@
       { "name": "SQL" },
       { "name": "MS SQL" },
       { "name": "TeamCity" },
-      { "name": "Octopus Deploy" }
+      { "name": "Octopus Deploy" },
+      { "name": "jQuery" }
     ]
   },
   {
