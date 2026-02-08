@@ -75,7 +75,7 @@ Yes! This site can be hosted on GitHub Pages. Since this is an Angular SSR app, 
 # Build for production (browser only)
 ng build --configuration production
 
-# The output will be in dist/resume-site/browser/
+# The output will be in dist/profile/browser/
 # Deploy the contents of this folder to GitHub Pages
 ```
 
@@ -87,7 +87,7 @@ npm install -g angular-cli-ghpages
 
 # Build and deploy
 ng build --configuration production --base-href "https://YOUR_USERNAME.github.io/REPO_NAME/"
-npx angular-cli-ghpages --dir=dist/resume-site/browser
+npx angular-cli-ghpages --dir=dist/profile/browser
 ```
 
 **Option 3: GitHub Actions (Automated)**
@@ -122,7 +122,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/resume-site/browser
+          publish_dir: ./dist/profile/browser
 ```
 
 ### Other Hosting Options
@@ -135,7 +135,7 @@ jobs:
 ## 📁 Project Structure
 
 ```
-resume-site/
+profile/
 ├── src/
 │   ├── app/
 │   │   ├── home/           # Main page with skills & experience
