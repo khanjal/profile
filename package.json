@@ -1,13 +1,15 @@
 {
-  "name": "resume-site",
+  "name": "profile",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:gh-pages": "ng build --configuration production --base-href /profile/",
+    "deploy": "npm run build:gh-pages && npx angular-cli-ghpages --dir=dist/profile/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:resume-site": "node dist/resume-site/server/server.mjs"
+    "serve:ssr:profile": "node dist/profile/server/server.mjs"
   },
   "private": true,
   "dependencies": {
