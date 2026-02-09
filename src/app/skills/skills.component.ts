@@ -40,6 +40,45 @@ export class SkillsComponent {
       .filter(group => group.skills.length > 0);
   }
 
+  get groupedByParent(): { parent: string | null; categories: { category: Skill['category']; skills: Skill[] }[] }[] {
+    // Build map: parent -> category -> skills[]
+    const parentMap = new Map<string | null, Map<Skill['category'], Skill[]>>();
+
+    this.skills.filter(s => s.category !== 'utility').forEach(skill => {
+      const parent = skill.parent || null;
+      const catMap = parentMap.get(parent) || new Map<Skill['category'], Skill[]>();
+      const list = catMap.get(skill.category) || [];
+      list.push(skill);
+      catMap.set(skill.category, list);
+      parentMap.set(parent, catMap);
+    });
+
+    const result: { parent: string | null; categories: { category: Skill['category']; skills: Skill[] }[] }[] = [];
+
+    // Put parentless group first (null) then named parents sorted
+    const parents = [...parentMap.keys()].sort((a, b) => {
+      if (a === null) return -1;
+      if (b === null) return 1;
+      return (a || '').localeCompare(b || '');
+    });
+
+    parents.forEach(parent => {
+      const catMap = parentMap.get(parent)!;
+      const categories = this.categoryOrder
+        .map(category => ({
+          category,
+          skills: (catMap.get(category) || []).sort((a, b) => b.years - a.years)
+        }))
+        .filter(g => g.skills.length > 0);
+
+      if (categories.length > 0) {
+        result.push({ parent, categories });
+      }
+    });
+
+    return result;
+  }
+
   get utilitySkills(): Skill[] {
     return this.skills
       .filter(skill => skill.category === 'utility')

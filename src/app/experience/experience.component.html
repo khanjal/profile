@@ -4,7 +4,7 @@
     <h2 class="section-title mb-12">Experiences</h2>
     
     <div class="space-y-8">
-      @for (job of jobs; track job.company + job.dateRange) {
+      @for (job of jobs; track job.company + job.startDate) {
         <div class="timeline-item transition-opacity duration-300" [class.opacity-30]="!shouldShowExperience(job.skills)">
           <div class="card">
             <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
@@ -12,10 +12,10 @@
                 <h3 class="text-2xl font-bold text-accent">{{ job.company }}</h3>
                 <p class="text-text-secondary">{{ job.title }} · {{ job.type }}</p>
               </div>
-              <span class="text-text-muted text-right">
-                <div>{{ job.dateRange }}</div>
+              <div class="text-text-muted text-right">
+                <div>{{ formatDateRange(job) }}</div>
                 <div class="text-xs text-text-muted/70">{{ calculateDuration(job.startDate, job.endDate) }}</div>
-              </span>
+              </div>
             </div>
             <div class="mt-4 space-y-4">
               @for (group of getGroupedSkills(job.skills); track group.category) {

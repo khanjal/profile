@@ -19,7 +19,6 @@ export interface JobExperience {
   title: string;
   company: string;
   type: string;
-  dateRange: string;
   startDate: string;
   endDate: string | null;
   skills: SkillUsage[];

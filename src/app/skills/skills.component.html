@@ -8,26 +8,34 @@
     </div>
     
     <div class="space-y-10">
-      @for (group of groupedSkills; track group.category) {
+      @for (parentGroup of groupedByParent; track parentGroup.parent) {
         <div>
-          <h3 class="text-sm uppercase tracking-[0.3em] text-text-muted mb-4">
-            {{ getCategoryLabel(group.category) }}
-          </h3>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            @for (skill of group.skills; track skill.name) {
-              <button
-                (click)="filterBySkill(skill.name)"
-                [class.ring-2]="isSkillSelected(skill.name)"
-                [class.ring-accent]="isSkillSelected(skill.name)"
-                [class.opacity-50]="!isSkillActive(skill.name)"
-                class="skill-badge cursor-pointer text-left transition-all duration-300">
-                <div class="flex flex-col">
-                  <span class="font-semibold text-text-primary">{{ skill.name }}</span>
-                  <span class="text-xs text-text-muted">{{ skill.years }} years</span>
-                </div>
-              </button>
-            }
-          </div>
+          @if (parentGroup.parent) {
+            <h3 class="text-base font-semibold mb-3">{{ parentGroup.parent }}</h3>
+          }
+
+          @for (group of parentGroup.categories; track group.category) {
+            <div class="mb-6">
+              <h4 class="text-sm uppercase tracking-[0.3em] text-text-muted mb-4">
+                {{ getCategoryLabel(group.category) }}
+              </h4>
+              <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                @for (skill of group.skills; track skill.name) {
+                  <button
+                    (click)="filterBySkill(skill.name)"
+                    [class.ring-2]="isSkillSelected(skill.name)"
+                    [class.ring-accent]="isSkillSelected(skill.name)"
+                    [class.opacity-50]="!isSkillActive(skill.name)"
+                    class="skill-badge cursor-pointer text-left transition-all duration-300">
+                    <div class="flex flex-col">
+                      <span class="font-semibold text-text-primary">{{ skill.name }}</span>
+                      <span class="text-xs text-text-muted">{{ skill.years }} years</span>
+                    </div>
+                  </button>
+                }
+              </div>
+            </div>
+          }
         </div>
       }
     </div>

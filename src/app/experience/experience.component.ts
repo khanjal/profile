@@ -98,6 +98,16 @@ export class ExperienceComponent {
     return `${years} yr${years > 1 ? 's' : ''} ${months} mo${months > 1 ? 's' : ''}`;
   }
 
+  formatDateRange(job: JobExperience): string {
+    const start = new Date(job.startDate);
+    if (isNaN(start.getTime())) return '';
+    const end = job.endDate ? new Date(job.endDate) : null;
+    const fmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short' });
+    const startLabel = fmt.format(start);
+    const endLabel = end && !isNaN(end.getTime()) ? fmt.format(end) : 'Present';
+    return `${startLabel} - ${endLabel}`;
+  }
+
   onSkillClick(skillName: string) {
     this.skillClicked.emit(skillName);
   }
