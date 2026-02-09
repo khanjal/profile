@@ -1,24 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import experiencesData from '../data/experiences.json';
-import skillsData from '../data/skills.json';
-
-export interface JobExperience {
-  title: string;
-  company: string;
-  type: string;
-  dateRange: string;
-  startDate: string;
-  endDate: string | null;
-  skills: SkillUsage[];
-}
-
-type SkillUsage = string | { name: string; startDate?: string | null; endDate?: string | null };
-
-interface SkillEntry {
-  name: string;
-  category: 'language' | 'framework' | 'cloud' | 'database' | 'concept' | 'utility';
-}
+import experiencesData from '@data/experiences.json';
+import skillsData from '@data/skills.json';
+import { JobExperience, SkillUsage, SkillEntry } from '@models';
 
 @Component({
   selector: 'app-experience',

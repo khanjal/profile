@@ -1,30 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AboutComponent } from '../about/about.component';
-import { SkillsComponent, Skill } from '../skills/skills.component';
-import { ExperienceComponent } from '../experience/experience.component';
-import { Certifications } from '../certifications/certifications';
-import { ProjectsComponent } from '../projects/projects.component';
-import experiencesData from '../data/experiences.json';
-import skillsData from '../data/skills.json';
-
-interface ExperienceEntry {
-  startDate: string;
-  endDate: string | null; // null means present
-  skills: SkillUsage[];
-}
-
-type SkillUsage = string | { name: string; startDate?: string | null; endDate?: string | null };
-
-interface SkillEntry {
-  name: string;
-  category: Skill['category'];
-}
+import { AboutComponent } from '@app/about/about.component';
+import { ExperienceComponent } from '@app/experience/experience.component';
+import { Certifications } from '@app/certifications/certifications';
+import { ProjectsComponent } from '@app/projects/projects.component';
+import experiencesData from '@data/experiences.json';
+import skillsData from '@data/skills.json';
+import { ExperienceEntry, SkillUsage, SkillEntry, Skill } from '@models';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AboutComponent, SkillsComponent, ExperienceComponent, Certifications, ProjectsComponent, CommonModule],
+  imports: [AboutComponent, ExperienceComponent, Certifications, ProjectsComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

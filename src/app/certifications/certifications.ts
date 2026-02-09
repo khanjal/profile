@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import certificationsData from '../data/certifications.json';
+import certificationsData from '@data/certifications.json';
 
 export interface Certification {
   name: string;

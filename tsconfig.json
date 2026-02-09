@@ -3,6 +3,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@models": ["app/models"],
+      "@models/*": ["app/models/*"],
+      "@data/*": ["app/data/*"],
+      "@app/*": ["app/*"]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

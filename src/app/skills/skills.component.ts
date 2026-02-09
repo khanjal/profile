@@ -1,11 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-export interface Skill {
-  name: string;
-  years: number;
-  category: 'language' | 'framework' | 'cloud' | 'database' | 'concept' | 'utility';
-}
+import { Skill } from '@models';
 
 @Component({
   selector: 'app-skills',
