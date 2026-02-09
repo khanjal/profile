@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "prebuild": "node scripts/validate-skills.js",
-    "build:gh-pages": "ng build --configuration production --base-href /profile/",
+    "build:gh-pages": "ng build --configuration production --base-href /",
     "prebuild:gh-pages": "node scripts/validate-skills.js",
     "deploy": "npm run build:gh-pages && npx angular-cli-ghpages --dir=dist/profile-site/browser",
     "validate-skills": "node scripts/validate-skills.js",
