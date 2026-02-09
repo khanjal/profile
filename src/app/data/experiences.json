@@ -20,7 +20,9 @@
       "AWS Bedrock",
       "GitHub Copilot",
       "Claude",
-      "Visual Studio"
+      "Visual Studio",
+      ".NET Core",
+      ".NET Framework"
     ]
   },
   {
@@ -44,7 +46,8 @@
       "CloudWatch",
       "Tailwind",
       "GitHub Copilot",
-      "Visual Studio"
+      "Visual Studio",
+      ".NET Core"
     ]
   },
   {
@@ -67,7 +70,9 @@
       "Azure",
       "GitHub Actions",
       "JetBrains Rider",
-      "VS Code"
+      "VS Code",
+      ".NET Core",
+      ".NET Framework"
     ]
   },
   {

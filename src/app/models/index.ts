@@ -4,6 +4,7 @@ export interface Skill {
   name: string;
   years: number;
   category: SkillCategory;
+  parent?: string;
 }
 
 export type SkillUsage = string | { name: string; startDate?: string | null; endDate?: string | null };
@@ -11,6 +12,7 @@ export type SkillUsage = string | { name: string; startDate?: string | null; end
 export interface SkillEntry {
   name: string;
   category: Skill['category'];
+  parent?: string;
 }
 
 export interface JobExperience {
