@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import experiencesData from '../data/experiences.json';
 import skillsData from '../data/skills.json';
@@ -13,11 +13,7 @@ export interface JobExperience {
   skills: SkillUsage[];
 }
 
-interface SkillUsage {
-  name: string;
-  startDate?: string | null;
-  endDate?: string | null;
-}
+type SkillUsage = string | { name: string; startDate?: string | null; endDate?: string | null };
 
 interface SkillEntry {
   name: string;
@@ -33,6 +29,7 @@ interface SkillEntry {
 })
 export class ExperienceComponent {
   @Input() selectedSkillFilter: string | null = null;
+  @Output() skillClicked = new EventEmitter<string>();
 
   jobs: JobExperience[] = experiencesData as JobExperience[];
   private skillEntries: SkillEntry[] = skillsData as SkillEntry[];
@@ -48,10 +45,11 @@ export class ExperienceComponent {
   ];
 
   shouldShowExperience(experienceSkills: SkillUsage[]): boolean {
-    if (!this.selectedSkillFilter) {
-      return true;
-    }
-    return experienceSkills.some(skill => skill.name === this.selectedSkillFilter);
+    if (!this.selectedSkillFilter) return true;
+    return experienceSkills.some(skill => {
+      const name = typeof skill === 'string' ? skill : skill.name;
+      return name === this.selectedSkillFilter;
+    });
   }
 
   getCategoryLabel(category: SkillEntry['category']): string {
@@ -72,15 +70,16 @@ export class ExperienceComponent {
     }
   }
 
-  getGroupedSkills(skills: SkillUsage[]): { category: SkillEntry['category']; skills: SkillUsage[] }[] {
-    const grouped = new Map<SkillEntry['category'], SkillUsage[]>();
+  getGroupedSkills(skills: SkillUsage[]): { category: SkillEntry['category']; skills: { name: string }[] }[] {
+    const grouped = new Map<SkillEntry['category'], { name: string }[]>();
 
     // Filter out utility category from experience display
     skills.forEach(skill => {
-      const category = this.skillCategoryMap.get(skill.name) || 'concept';
+      const name = typeof skill === 'string' ? skill : skill.name;
+      const category = this.skillCategoryMap.get(name) || 'concept';
       if (category === 'utility') return; // Skip utilities
       const list = grouped.get(category) || [];
-      list.push(skill);
+      list.push({ name });
       grouped.set(category, list);
     });
 
@@ -90,6 +89,12 @@ export class ExperienceComponent {
         skills: grouped.get(category) || []
       }))
       .filter(group => group.skills.length > 0);
+  }
+
+  getUtilitySkills(skills: SkillUsage[]): string[] {
+    return skills
+      .map(s => (typeof s === 'string' ? s : s.name))
+      .filter(name => this.skillCategoryMap.get(name) === 'utility');
   }
 
   calculateDuration(startDate: string, endDate: string | null): string {
@@ -107,5 +112,15 @@ export class ExperienceComponent {
       return years === 1 ? '1 year' : `${years} years`;
     }
     return `${years} yr${years > 1 ? 's' : ''} ${months} mo${months > 1 ? 's' : ''}`;
+  }
+
+  onSkillClick(skillName: string) {
+    this.skillClicked.emit(skillName);
+  }
+
+  getSkillDuration(skill: SkillUsage, job: JobExperience): string {
+    const s = (typeof skill === 'string') ? job.startDate : (skill.startDate ? skill.startDate : job.startDate);
+    const e = (typeof skill === 'string') ? job.endDate : ((skill.endDate !== undefined && skill.endDate !== null) ? skill.endDate : job.endDate);
+    return this.calculateDuration(s, e);
   }
 }

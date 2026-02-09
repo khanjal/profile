@@ -14,11 +14,7 @@ interface ExperienceEntry {
   skills: SkillUsage[];
 }
 
-interface SkillUsage {
-  name: string;
-  startDate?: string | null;
-  endDate?: string | null;
-}
+type SkillUsage = string | { name: string; startDate?: string | null; endDate?: string | null };
 
 interface SkillEntry {
   name: string;
@@ -58,22 +54,22 @@ export class HomeComponent implements OnInit {
       const jobEnd = exp.endDate ? new Date(exp.endDate) : new Date();
 
       exp.skills.forEach(skill => {
-        let skillStart = skill.startDate ? new Date(skill.startDate) : jobStart;
-        let skillEnd = skill.endDate ? new Date(skill.endDate) : jobEnd;
+        const skillName = (typeof skill === 'string') ? skill : skill.name;
+        let skillStart = (typeof skill === 'string' || !skill.startDate) ? jobStart : new Date(skill.startDate as string);
+        let skillEnd = (typeof skill === 'string' || !skill.endDate) ? jobEnd : new Date(skill.endDate as string);
 
         // Intersect with cutoff to only count recent usage
         if (skillEnd <= cutoff) {
-          // entirely before cutoff, ignore
-          return;
+          return; // entirely before cutoff, ignore
         }
         if (skillStart < cutoff) {
           skillStart = cutoff;
         }
 
-        if (!skillMap.has(skill.name)) {
-          skillMap.set(skill.name, { periods: [], category: this.getSkillCategory(skill.name) });
+        if (!skillMap.has(skillName)) {
+          skillMap.set(skillName, { periods: [], category: this.getSkillCategory(skillName) });
         }
-        skillMap.get(skill.name)!.periods.push({ start: skillStart, end: skillEnd });
+        skillMap.get(skillName)!.periods.push({ start: skillStart, end: skillEnd });
       });
     });
 
@@ -108,7 +104,12 @@ export class HomeComponent implements OnInit {
   }
 
   onSkillFilterChanged(skillName: string | null): void {
-    this.selectedSkillFilter = skillName;
+    // Toggle: deselect if the same skill is clicked again
+    if (this.selectedSkillFilter === skillName) {
+      this.selectedSkillFilter = null;
+    } else {
+      this.selectedSkillFilter = skillName;
+    }
   }
 
   calculateTotalYears(periods: { start: Date, end: Date }[]): number {

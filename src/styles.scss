@@ -107,12 +107,19 @@
 
   /* Skill badge */
   .skill-badge {
-    @apply inline-flex flex-col items-start gap-1 px-3 py-2 bg-secondary rounded-lg;
+    @apply inline-flex items-center gap-2 px-3 py-2 bg-secondary rounded-lg;
     @apply border border-accent/20 hover:border-accent/50;
     @apply transition-all duration-300 hover:scale-105;
     white-space: normal;
     word-break: break-word;
     min-width: 0;
+  }
+
+  /* Highlighted skill when selected */
+  .skill-selected {
+    @apply bg-accent/10 border-accent/60 text-accent;
+    @apply shadow-glow-sm; 
+    transform: translateZ(0);
   }
 
   /* Timeline item */

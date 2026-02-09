@@ -7,18 +7,20 @@
     "startDate": "2024-01-01",
     "endDate": null,
     "skills": [
-      { "name": "C#" },
-      { "name": "SQL" },
-      { "name": "Angular" },
-      { "name": "AWS" },
-      { "name": "DynamoDB" },
-      { "name": "MS SQL" },
-      { "name": "S3" },
-      { "name": "API Gateway" },
-      { "name": "CloudWatch" },
-      { "name": "AWS Bedrock" },
-      { "name": "GitHub Copilot" },
-      { "name": "Claude" }
+      "C#",
+      "SQL",
+      "Angular",
+      "AWS",
+      "DynamoDB",
+      "MS SQL",
+      "SQL Management Studio",
+      "S3",
+      "API Gateway",
+      "CloudWatch",
+      "AWS Bedrock",
+      "GitHub Copilot",
+      "Claude",
+      "Visual Studio"
     ]
   },
   {
@@ -29,19 +31,20 @@
     "startDate": "2013-04-01",
     "endDate": null,
     "skills": [
-      { "name": "C#" },
-      { "name": "TypeScript" },
-      { "name": "Angular" },
-      { "name": "AWS" },
-      { "name": "DynamoDB" },
-      { "name": "Lambda" },
-      { "name": "Alexa Skills" },
-      { "name": "Git" },
-      { "name": "S3" },
-      { "name": "API Gateway" },
-      { "name": "CloudWatch" },
-      { "name": "Tailwind" },
-      { "name": "GitHub Copilot" }
+      "C#",
+      "TypeScript",
+      "Angular",
+      "AWS",
+      "DynamoDB",
+      "Lambda",
+      "Alexa Skills",
+      "Git",
+      "S3",
+      "API Gateway",
+      "CloudWatch",
+      "Tailwind",
+      "GitHub Copilot",
+      "Visual Studio"
     ]
   },
   {
@@ -52,16 +55,19 @@
     "startDate": "2018-12-01",
     "endDate": "2023-08-31",
     "skills": [
-      { "name": "C#" },
-      { "name": "Angular" },
-      { "name": "Bootstrap" },
-      { "name": "Microservices" },
-      { "name": "REST APIs" },
-      { "name": "SOAP" },
-      { "name": "SQL" },
-      { "name": "MS SQL" },
-      { "name": "Azure" },
-      { "name": "GitHub Actions" }
+      "C#",
+      "Angular",
+      "Bootstrap",
+      "Microservices",
+      "REST APIs",
+      "SOAP",
+      "SQL",
+      "MS SQL",
+      "SQL Management Studio",
+      "Azure",
+      "GitHub Actions",
+      "JetBrains Rider",
+      "VS Code"
     ]
   },
   {
@@ -72,16 +78,18 @@
     "startDate": "2013-10-01",
     "endDate": "2018-11-30",
     "skills": [
-      { "name": "C#" },
-      { "name": "Angular" },
-      { "name": "Bootstrap" },
-      { "name": "JavaScript" },
-      { "name": "REST APIs" },
-      { "name": "SQL" },
-      { "name": "MS SQL" },
-      { "name": "TeamCity" },
-      { "name": "Octopus Deploy" },
-      { "name": "jQuery" }
+      "C#",
+      "Angular",
+      "Bootstrap",
+      "JavaScript",
+      "REST APIs",
+      "SQL",
+      "MS SQL",
+      "SQL Management Studio",
+      "TeamCity",
+      "Octopus Deploy",
+      "jQuery",
+      "Visual Studio"
     ]
   },
   {
@@ -92,12 +100,14 @@
     "startDate": "2012-09-01",
     "endDate": "2013-10-31",
     "skills": [
-      { "name": "ASP.NET MVC" },
-      { "name": "Bootstrap" },
-      { "name": "JavaScript" },
-      { "name": "SQL" },
-      { "name": "MS SQL" },
-      { "name": "SCRUM" }
+      "ASP.NET MVC",
+      "Bootstrap",
+      "JavaScript",
+      "SQL",
+      "MS SQL",
+      "SQL Management Studio",
+      "SCRUM",
+      "Visual Studio"
     ]
   },
   {
@@ -108,12 +118,13 @@
     "startDate": "2010-10-01",
     "endDate": "2012-08-31",
     "skills": [
-      { "name": "C#" },
-      { "name": "JavaScript" },
-      { "name": "jQuery" },
-      { "name": "AJAX" },
-      { "name": "SQL" },
-      { "name": "MySQL" }
+      "C#",
+      "JavaScript",
+      "jQuery",
+      "AJAX",
+      "SQL",
+      "MySQL",
+      "Visual Studio"
     ]
   },
   {
@@ -124,13 +135,20 @@
     "startDate": "2008-11-01",
     "endDate": "2010-09-30",
     "skills": [
-      { "name": "VB.NET" },
-      { "name": "JavaScript" },
-      { "name": "SQL" },
-      { "name": "MS SQL" },
-      { "name": "XML" },
-      { "name": "BizTalk" },
-      { "name": "SVN" }
+      "Visual Basic",
+      "JavaScript",
+      "SQL",
+      "MS SQL",
+      "SQL Management Studio",
+      "XML",
+      "BizTalk",
+      "SVN",
+      "WSDL",
+      "XSLT",
+      "SourceSafe",
+      "IIS",
+      "UML",
+      "Visual Studio"
     ]
   },
   {
@@ -141,10 +159,13 @@
     "startDate": "2008-07-01",
     "endDate": "2008-10-31",
     "skills": [
-      { "name": "JavaScript" },
-      { "name": "C#" },
-      { "name": "SQL" },
-      { "name": "MS SQL" }
+      "JavaScript",
+      "C#",
+      "SQL",
+      "MS SQL",
+      "SQL Management Studio",
+      "jQuery",
+      "Visual Studio"
     ]
   },
   {
@@ -155,13 +176,15 @@
     "startDate": "2007-05-01",
     "endDate": "2008-06-30",
     "skills": [
-      { "name": "ASP.NET" },
-      { "name": "PHP" },
-      { "name": "C#" },
-      { "name": "SQL" },
-      { "name": "MS SQL" },
-      { "name": "Crystal Reports" },
-      { "name": "SSRS" }
+      "ASP.NET",
+      "PHP",
+      "C#",
+      "SQL",
+      "MS SQL",
+      "SQL Management Studio",
+      "Crystal Reports",
+      "SSRS",
+      "Visual Studio"
     ]
   },
   {
@@ -172,14 +195,16 @@
     "startDate": "2005-04-01",
     "endDate": "2007-05-31",
     "skills": [
-      { "name": "ASP.NET" },
-      { "name": "VB.NET" },
-      { "name": "Perl" },
-      { "name": "JavaScript" },
-      { "name": "C#" },
-      { "name": "SQL" },
-      { "name": "MS SQL" },
-      { "name": "VB" }
+      "ASP.NET",
+      "VB.NET",
+      "Perl",
+      "JavaScript",
+      "C#",
+      "SQL",
+      "MS SQL",
+      "SQL Management Studio",
+      "VB",
+      "Visual Studio"
     ]
   },
   {
@@ -190,11 +215,12 @@
     "startDate": "2004-04-01",
     "endDate": "2005-04-30",
     "skills": [
-      { "name": "PHP" },
-      { "name": "PostgreSQL" },
-      { "name": "MySQL" },
-      { "name": "SQL" },
-      { "name": "MS SQL" }
+      "PHP",
+      "PostgreSQL",
+      "MySQL",
+      "SQL",
+      "MS SQL",
+      "SQL Management Studio"
     ]
   },
   {
@@ -205,10 +231,12 @@
     "startDate": "2001-06-01",
     "endDate": "2004-04-30",
     "skills": [
-      { "name": "ASP" },
-      { "name": "PHP" },
-      { "name": "SQL" },
-      { "name": "MS SQL" }
+      "ASP",
+      "PHP",
+      "SQL",
+      "MS SQL",
+      "SQL Management Studio",
+      "Visual Studio"
     ]
   }
 ]

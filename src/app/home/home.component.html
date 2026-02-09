@@ -1,10 +1,7 @@
 <app-about></app-about>
-<app-skills 
-  [skills]="skills" 
-  [selectedSkillFilter]="selectedSkillFilter"
-  (skillFilterChanged)="onSkillFilterChanged($event)">
-</app-skills>
-<app-experience [selectedSkillFilter]="selectedSkillFilter"></app-experience>
+<!-- skills hidden for now; experience will handle skill clicks -->
+<!-- <app-skills [skills]="skills" [selectedSkillFilter]="selectedSkillFilter" (skillFilterChanged)="onSkillFilterChanged($event)"></app-skills> -->
+<app-experience [selectedSkillFilter]="selectedSkillFilter" (skillClicked)="onSkillFilterChanged($event)"></app-experience>
 <app-certifications></app-certifications>
 
 <!-- Projects Section -->
