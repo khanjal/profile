@@ -2,12 +2,7 @@
 <!-- skills hidden for now; experience will handle skill clicks -->
 <!-- <app-skills [skills]="skills" [selectedSkillFilter]="selectedSkillFilter" (skillFilterChanged)="onSkillFilterChanged($event)"></app-skills> -->
 <app-experience [selectedSkillFilter]="selectedSkillFilter" (skillClicked)="onSkillFilterChanged($event)"></app-experience>
-<app-certifications></app-certifications>
 
-<!-- Projects Section -->
-<section id="projects" class="section">
-  <div class="container-custom">
-    <h2 class="section-title mb-12">PROJECTS</h2>
-    <app-projects></app-projects>
-  </div>
-</section>
+<app-projects [selectedSkillFilter]="selectedSkillFilter"></app-projects>
+
+<app-certifications></app-certifications>

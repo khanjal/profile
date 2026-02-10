@@ -1,9 +1,13 @@
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-  <a *ngFor="let project of projects" 
-     [href]="project.url" 
-     target="_blank" 
-     rel="noopener noreferrer"
-     class="card group relative overflow-hidden hover:scale-105 transition-all duration-300 block">
+<section id="projects" class="section">
+  <div class="container-custom">
+    <h2 class="section-title mb-12">Projects</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <a *ngFor="let project of displayedProjects"
+         [href]="project.url"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="card group relative overflow-hidden hover:scale-105 transition-all duration-300 block">
     
     <!-- Project Header -->
     <div class="mb-4">
@@ -37,5 +41,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
       </svg>
     </div>
-  </a>
-</div>
+      </a>
+    </div>
+  </div>
+</section>

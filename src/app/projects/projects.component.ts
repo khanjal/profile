@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import projectsData from '../data/projects.json';
 
@@ -21,6 +21,12 @@ interface Project {
 })
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
+  @Input() selectedSkillFilter?: string | null;
+
+  get displayedProjects(): Project[] {
+    if (!this.selectedSkillFilter) return this.projects;
+    return this.projects.filter(p => p.tags?.includes(this.selectedSkillFilter as string));
+  }
 
   ngOnInit() {
     this.projects = projectsData;
