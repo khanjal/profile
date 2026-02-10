@@ -1,47 +1,41 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-  <div class="group relative">
-    <div class="aspect-w-16 aspect-h-9">
-      <img class="object-cover w-full h-full" src="https://via.placeholder.com/600x400" alt="Project 1">
-    </div>
-    <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-      <div class="text-white text-center">
-        <h3 class="text-2xl font-bold">Project 1</h3>
-        <p>A brief description of Project 1.</p>
-        <div class="flex gap-2 mt-2">
-          <span class="bg-gray-700 px-2 py-1 rounded-full text-sm">Angular</span>
-          <span class="bg-gray-700 px-2 py-1 rounded-full text-sm">Tailwind CSS</span>
+  <a *ngFor="let project of projects" 
+     [href]="project.url" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="card group relative overflow-hidden hover:scale-105 transition-all duration-300 block">
+    
+    <!-- Project Header -->
+    <div class="mb-4">
+      <div class="flex items-center gap-3 mb-2">
+        <img *ngIf="project.image" 
+             [src]="project.image" 
+             [alt]="project.company"
+             class="w-10 h-10 rounded object-contain bg-white p-1">
+        <div>
+          <h3 class="text-xl font-bold text-text-primary group-hover:text-accent transition-colors">{{ project.name }}</h3>
+          <p class="text-sm text-text-secondary">{{ project.company }}</p>
         </div>
       </div>
     </div>
-  </div>
-  <div class="group relative">
-    <div class="aspect-w-16 aspect-h-9">
-      <img class="object-cover w-full h-full" src="https://via.placeholder.com/600x400" alt="Project 2">
+
+    <!-- Project Description -->
+    <p class="text-text-secondary mb-4">{{ project.description }}</p>
+
+    <!-- Tech Stack Tags -->
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span *ngFor="let tag of project.tags" 
+            class="px-3 py-1 bg-secondary-dark text-accent text-sm rounded-full border border-accent/20">
+        {{ tag }}
+      </span>
     </div>
-    <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-      <div class="text-white text-center">
-        <h3 class="text-2xl font-bold">Project 2</h3>
-        <p>A brief description of Project 2.</p>
-        <div class="flex gap-2 mt-2">
-          <span class="bg-gray-700 px-2 py-1 rounded-full text-sm">React</span>
-          <span class="bg-gray-700 px-2 py-1 rounded-full text-sm">Express</span>
-        </div>
-      </div>
+
+    <!-- Link Icon -->
+    <div class="flex items-center gap-2 text-accent text-sm font-medium">
+      <span>View Project</span>
+      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      </svg>
     </div>
-  </div>
-  <div class="group relative">
-    <div class="aspect-w-16 aspect-h-9">
-      <img class="object-cover w-full h-full" src="https://via.placeholder.com/600x400" alt="Project 3">
-    </div>
-    <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-      <div class="text-white text-center">
-        <h3 class="text-2xl font-bold">Project 3</h3>
-        <p>A brief description of Project 3.</p>
-        <div class="flex gap-2 mt-2">
-          <span class="bg-gray-700 px-2 py-1 rounded-full text-sm">Vue</span>
-          <span class="bg-gray-700 px-2 py-1 rounded-full text-sm">Firebase</span>
-        </div>
-      </div>
-    </div>
-  </div>
+  </a>
 </div>

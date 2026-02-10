@@ -29,8 +29,7 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
-              ,
+              },
               {
                 "glob": "CNAME",
                 "input": ".",

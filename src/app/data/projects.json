@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Raptor Sheets",
+    "company": "Iron Raptor Digital",
+    "description": "A comprehensive character sheet and game management platform for tabletop RPG enthusiasts.",
+    "url": "https://www.raptorsheets.com/",
+    "image": "/companies/iron-raptor-digital.png",
+    "tags": ["Angular", "TypeScript", "AWS", "DynamoDB", "Tailwind"],
+    "featured": true
+  },
+  {
+    "name": "Raptor Gig",
+    "company": "Iron Raptor Digital",
+    "description": "Gig management and tracking system integrated with Raptor Sheets ecosystem.",
+    "url": "https://gig.raptorsheets.com/",
+    "image": "/companies/iron-raptor-digital.png",
+    "tags": ["Angular", "TypeScript", "AWS", "DynamoDB", "Tailwind"],
+    "featured": true
+  }
+]

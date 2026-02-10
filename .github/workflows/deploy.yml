@@ -27,7 +27,7 @@ jobs:
         run: npm run validate-skills
 
       - name: Build
-        run: npm run build -- --configuration production --base-href "/profile/"
+        run: npm run build -- --configuration production --base-href "/"
 
       - name: Ensure index.html exists for Pages
         run: |
