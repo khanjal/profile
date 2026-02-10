@@ -7,6 +7,7 @@
     "build": "ng build",
     "prebuild": "node scripts/validate-skills.js",
     "build:gh-pages": "ng build --configuration production --base-href /",
+    "postbuild:gh-pages": "node scripts/copy-index.js",
     "prebuild:gh-pages": "node scripts/validate-skills.js",
     "deploy": "npm run build:gh-pages && npx angular-cli-ghpages --dir=dist/profile-site/browser",
     "validate-skills": "node scripts/validate-skills.js",
