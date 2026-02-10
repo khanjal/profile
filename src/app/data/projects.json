@@ -2,10 +2,10 @@
   {
     "name": "Raptor Sheets",
     "company": "Iron Raptor Digital",
-    "description": "A comprehensive character sheet and game management platform for tabletop RPG enthusiasts.",
+    "description": "A comprehensive .NET library that simplifies Google Sheets API interactions. Build custom solutions or use specialized packages for common use cases like gig tracking.",
     "url": "https://www.raptorsheets.com/",
-    "image": "/companies/iron-raptor-digital.png",
-    "tags": ["Angular", "TypeScript", "AWS", "DynamoDB", "Tailwind"],
+    "image": "/companies/ironraptor.jpg",
+    "tags": ["C#", ".NET Core", "Google Sheets API", "NuGet", "xUnit"],
     "featured": true
   },
   {
@@ -13,8 +13,8 @@
     "company": "Iron Raptor Digital",
     "description": "Gig management and tracking system integrated with Raptor Sheets ecosystem.",
     "url": "https://gig.raptorsheets.com/",
-    "image": "/companies/iron-raptor-digital.png",
-    "tags": ["Angular", "TypeScript", "AWS", "DynamoDB", "Tailwind"],
+    "image": "/companies/ironraptor.jpg",
+    "tags": ["Angular", "TypeScript", "AWS", "Lambda", "API Gateway", "Tailwind"],
     "featured": true
   }
 ]

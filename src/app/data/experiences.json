@@ -2,6 +2,7 @@
   {
     "title": "Software Engineer",
     "company": "Rocket Mortgage",
+    "logo": "/companies/rocket.jpg",
     "type": "Full-time",
     
     "startDate": "2024-01-01",
@@ -29,6 +30,7 @@
   {
     "title": "Software Engineer / Owner",
     "company": "Iron Raptor Digital",
+    "logo": "/companies/ironraptor.jpg",
     "type": "Freelance",
     
     "startDate": "2013-04-01",
@@ -54,6 +56,7 @@
   {
     "title": "Software Engineer II",
     "company": "DICK'S Sporting Goods",
+    "logo": "/companies/dicks.jpg",
     "type": "Full-time",
     
     "startDate": "2018-12-01",
@@ -80,6 +83,7 @@
   {
     "title": "Software Engineer",
     "company": "AutoSoft Inc",
+    "logo": "/companies/autosoft.jpg",
     "type": "Full-time",
     
     "startDate": "2013-10-01",
@@ -102,6 +106,7 @@
   {
     "title": "Web Application Engineer II",
     "company": "ZOLL Medical Corporation",
+    "logo": "/companies/zoll.jpg",
     "type": "Full-time",
     
     "startDate": "2012-09-01",
@@ -121,6 +126,7 @@
   {
     "title": "Computer Programmer",
     "company": "Perkins Communications",
+    "logo": "/companies/perkins.jpg",
     "type": "Full-time",
     
     "startDate": "2010-10-01",
@@ -138,6 +144,7 @@
   {
     "title": "Developer",
     "company": "Westpoint Underwriters",
+    "logo": "/companies/westpoint.jpg",
     "type": "Full-time",
     
     "startDate": "2008-11-01",
@@ -162,6 +169,7 @@
   {
     "title": "Interactive Developer",
     "company": "Mindgrab Media",
+    "logo": "/companies/mindgrab.jpg",
     "type": "Freelance",
     
     "startDate": "2008-07-01",
@@ -179,6 +187,7 @@
   {
     "title": "Web Application Developer",
     "company": "PGT Trucking",
+    "logo": "/companies/pgt.jpg",
     "type": "Full-time",
     
     "startDate": "2007-05-01",
@@ -198,6 +207,7 @@
   {
     "title": "Web Application Programmer",
     "company": "Perkins Communications",
+    "logo": "/companies/perkins.jpg",
     "type": "Full-time",
     
     "startDate": "2005-04-01",

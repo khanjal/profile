@@ -18,6 +18,7 @@ export interface SkillEntry {
 export interface JobExperience {
   title: string;
   company: string;
+  logo?: string;
   type: string;
   startDate: string;
   endDate: string | null;
