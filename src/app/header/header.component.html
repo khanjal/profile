@@ -29,14 +29,33 @@
       </div>
       
       <!-- Mobile Menu Button -->
-      <button class="md:hidden text-accent p-2">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button (click)="$event.stopPropagation(); toggleMobile()" class="md:hidden text-accent p-2" [attr.aria-expanded]="mobileOpen" aria-label="Toggle menu" type="button">
+        <svg *ngIf="!mobileOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg *ngIf="mobileOpen" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
+    <!-- Mobile menu panel -->
+    <div *ngIf="mobileOpen" (click)="$event.stopPropagation()" class="md:hidden mt-4 border-t border-accent/10 pt-4">
+      <div class="flex flex-col gap-4"> 
+        <a (click)="toggleMobile()" href="#about" class="text-text-secondary hover:text-accent transition-colors font-medium">About</a>
+        <a (click)="toggleMobile()" href="#experience" class="text-text-secondary hover:text-accent transition-colors font-medium">Experience</a>
+        <a (click)="toggleMobile()" href="#certifications" class="text-text-secondary hover:text-accent transition-colors font-medium">Certifications</a>
+        <a (click)="toggleMobile()" href="#projects" class="text-text-secondary hover:text-accent transition-colors font-medium">Projects</a>
+        <div class="flex gap-4 items-center pt-2">
+          <a href="https://www.linkedin.com/in/justinharding/" target="_blank" rel="noopener" class="text-text-secondary hover:text-accent transition-colors">
+            LinkedIn
+          </a>
+          <a href="https://github.com/khanjal" target="_blank" rel="noopener" class="text-text-secondary hover:text-accent transition-colors">
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
   </nav>
 </header>
-
 <!-- Spacer to prevent content from going under fixed header -->
 <div class="h-16"></div>
