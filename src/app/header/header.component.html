@@ -41,10 +41,10 @@
     <!-- Mobile menu panel -->
     <div *ngIf="mobileOpen" (click)="$event.stopPropagation()" class="md:hidden mt-4 border-t border-accent/10 pt-4">
       <div class="flex flex-col gap-4"> 
-        <a (click)="toggleMobile()" href="#about" class="text-text-secondary hover:text-accent transition-colors font-medium">About</a>
-        <a (click)="toggleMobile()" href="#experience" class="text-text-secondary hover:text-accent transition-colors font-medium">Experience</a>
-        <a (click)="toggleMobile()" href="#certifications" class="text-text-secondary hover:text-accent transition-colors font-medium">Certifications</a>
-        <a (click)="toggleMobile()" href="#projects" class="text-text-secondary hover:text-accent transition-colors font-medium">Projects</a>
+        <a (click)="mobileNavigate($event,'about')" href="#about" class="text-text-secondary hover:text-accent transition-colors font-medium">About</a>
+        <a (click)="mobileNavigate($event,'experience')" href="#experience" class="text-text-secondary hover:text-accent transition-colors font-medium">Experience</a>
+        <a (click)="mobileNavigate($event,'certifications')" href="#certifications" class="text-text-secondary hover:text-accent transition-colors font-medium">Certifications</a>
+        <a (click)="mobileNavigate($event,'projects')" href="#projects" class="text-text-secondary hover:text-accent transition-colors font-medium">Projects</a>
         <div class="flex gap-4 items-center pt-2">
           <a href="https://www.linkedin.com/in/justinharding/" target="_blank" rel="noopener" class="text-text-secondary hover:text-accent transition-colors">
             LinkedIn
