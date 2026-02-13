@@ -13,7 +13,7 @@
     "company": "Iron Raptor Digital",
     "description": "Gig management and tracking system integrated with Raptor Sheets ecosystem.",
     "url": "https://gig.raptorsheets.com/",
-    "image": "/companies/ironraptor.jpg",
+    "image": "/projects/raptorgig.png",
     "tags": ["Angular", "TypeScript", "AWS", "Lambda", "API Gateway", "Tailwind"],
     "featured": true
   }
