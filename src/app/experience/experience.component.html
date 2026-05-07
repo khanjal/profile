@@ -8,13 +8,28 @@
         <div class="timeline-item transition-opacity duration-300" [class.opacity-30]="!shouldShowExperience(job.skills)">
           <div class="card">
             <div class="flex justify-between items-start mb-4 flex-wrap gap-4">
-              <div class="flex items-center gap-4">
+              <!-- Desktop: logo left, company name to the right, title · type below company -->
+              <div class="hidden sm:flex items-start gap-4 w-full sm:w-auto">
                 @if (job.logo) {
                   <img [src]="job.logo" [alt]="job.company + ' logo'" class="w-12 h-12 rounded object-contain bg-white p-1">
                 }
                 <div>
                   <h3 class="text-2xl font-bold text-accent">{{ job.company }}</h3>
                   <p class="text-text-secondary">{{ job.title }} · {{ job.type }}</p>
+                </div>
+              </div>
+
+              <!-- Mobile: company on first line, then logo + title, then type below title -->
+              <div class="flex flex-col sm:hidden w-full">
+                <h3 class="text-2xl font-bold text-accent">{{ job.company }}</h3>
+                <div class="flex items-start gap-4 mt-2">
+                  @if (job.logo) {
+                    <img [src]="job.logo" [alt]="job.company + ' logo'" class="w-12 h-12 rounded object-contain bg-white p-1">
+                  }
+                  <div>
+                    <div class="text-lg font-semibold">{{ job.title }}</div>
+                    <div class="text-text-secondary">{{ job.type }}</div>
+                  </div>
                 </div>
               </div>
               <div class="text-text-muted text-right">
