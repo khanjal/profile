@@ -5,7 +5,7 @@
     "logo": "/companies/rocket.jpg",
     "type": "Full-time",
     
-    "startDate": "2024-01-01",
+    "startDate": "2024-01",
     "endDate": null,
     "skills": [
       "C#",
@@ -33,7 +33,7 @@
     "logo": "/companies/ironraptor.jpg",
     "type": "Freelance",
     
-    "startDate": "2013-04-01",
+    "startDate": "2013-04",
     "endDate": null,
     "skills": [
       "C#",
@@ -59,8 +59,8 @@
     "logo": "/companies/dicks.jpg",
     "type": "Full-time",
     
-    "startDate": "2018-12-01",
-    "endDate": "2023-08-31",
+    "startDate": "2018-12",
+    "endDate": "2023-08",
     "skills": [
       "C#",
       "Angular",
@@ -86,8 +86,8 @@
     "logo": "/companies/autosoft.jpg",
     "type": "Full-time",
     
-    "startDate": "2013-10-01",
-    "endDate": "2018-11-30",
+    "startDate": "2013-10",
+    "endDate": "2018-11",
     "skills": [
       "C#",
       "Angular",
@@ -109,8 +109,8 @@
     "logo": "/companies/zoll.jpg",
     "type": "Full-time",
     
-    "startDate": "2012-09-01",
-    "endDate": "2013-10-31",
+    "startDate": "2012-09",
+    "endDate": "2013-10",
     "skills": [
       "ASP.NET MVC",
       "Bootstrap",
@@ -129,8 +129,8 @@
     "logo": "/companies/perkins.jpg",
     "type": "Full-time",
     
-    "startDate": "2010-10-01",
-    "endDate": "2012-08-31",
+    "startDate": "2010-10",
+    "endDate": "2012-08",
     "skills": [
       "C#",
       "JavaScript",
@@ -147,8 +147,8 @@
     "logo": "/companies/westpoint.jpg",
     "type": "Full-time",
     
-    "startDate": "2008-11-01",
-    "endDate": "2010-09-30",
+    "startDate": "2008-11",
+    "endDate": "2010-09",
     "skills": [
       "Visual Basic",
       "JavaScript",
@@ -172,8 +172,8 @@
     "logo": "/companies/mindgrab.jpg",
     "type": "Freelance",
     
-    "startDate": "2008-07-01",
-    "endDate": "2008-10-31",
+    "startDate": "2008-07",
+    "endDate": "2008-10",
     "skills": [
       "JavaScript",
       "C#",
@@ -190,8 +190,8 @@
     "logo": "/companies/pgt.jpg",
     "type": "Full-time",
     
-    "startDate": "2007-05-01",
-    "endDate": "2008-06-30",
+    "startDate": "2007-05",
+    "endDate": "2008-06",
     "skills": [
       "ASP.NET",
       "PHP",
@@ -210,8 +210,8 @@
     "logo": "/companies/perkins.jpg",
     "type": "Full-time",
     
-    "startDate": "2005-04-01",
-    "endDate": "2007-05-31",
+    "startDate": "2005-04",
+    "endDate": "2007-05",
     "skills": [
       "ASP.NET",
       "VB.NET",
@@ -231,8 +231,8 @@
     "logo": "/companies/birddog.jpg",
     "type": "Full-time",
     
-    "startDate": "2004-04-01",
-    "endDate": "2005-04-30",
+    "startDate": "2004-04",
+    "endDate": "2005-04",
     "skills": [
       "PHP",
       "PostgreSQL",
@@ -247,8 +247,8 @@
     "company": "Innovative Ideas Int.",
     "type": "Full-time",
     
-    "startDate": "2001-06-01",
-    "endDate": "2004-04-30",
+    "startDate": "2001-06",
+    "endDate": "2004-04",
     "skills": [
       "ASP",
       "PHP",
