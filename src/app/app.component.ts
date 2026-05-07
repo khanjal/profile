@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 
@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 })
 export class AppComponent {
   title = 'profile-site';
+  showBackToTop = signal(false);
 
   // Intercept in-page anchor clicks site-wide and perform a smooth scroll
   @HostListener('document:click', ['$event'])
@@ -40,5 +41,12 @@ export class AppComponent {
     const headerOffset = headerEl ? headerEl.offsetHeight : 64;
     const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
     window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const aboutEl = document.getElementById('about');
+    const threshold = aboutEl ? (aboutEl.offsetTop + aboutEl.offsetHeight) : 200;
+    this.showBackToTop.set(window.scrollY > threshold);
   }
 }
