@@ -32,22 +32,54 @@ export class ExperienceComponent {
   ];
 
   get featuredTechnologies(): string[] {
-    const seen = new Set<string>();
-    const ordered: string[] = [];
+    const now = Date.now();
+    const metrics = new Map<string, { name: string; lastUsed: number; usageCount: number; firstSeen: number }>();
 
-    this.jobs.forEach(job => {
-      job.skills.forEach(skill => {
+    this.jobs.forEach((job, jobIndex) => {
+      const recency = this.getJobRecencyTimestamp(job, now);
+
+      job.skills.forEach((skill, skillIndex) => {
         const name = typeof skill === 'string' ? skill : skill.name;
         const key = name.toLowerCase();
-        if (seen.has(key)) {
+
+        const existing = metrics.get(key);
+        if (existing) {
+          existing.lastUsed = Math.max(existing.lastUsed, recency);
+          existing.usageCount += 1;
           return;
         }
-        seen.add(key);
-        ordered.push(name);
+
+        metrics.set(key, {
+          name,
+          lastUsed: recency,
+          usageCount: 1,
+          firstSeen: (jobIndex * 1000) + skillIndex
+        });
       });
     });
 
-    return ordered;
+    return [...metrics.values()]
+      .sort((a, b) =>
+        (b.lastUsed - a.lastUsed) ||
+        (b.usageCount - a.usageCount) ||
+        (a.firstSeen - b.firstSeen) ||
+        a.name.localeCompare(b.name)
+      )
+      .map(skill => skill.name);
+  }
+
+  private getJobRecencyTimestamp(job: JobExperience, now: number): number {
+    if (job.endDate === null) {
+      return now;
+    }
+
+    const end = new Date(job.endDate);
+    if (!isNaN(end.getTime())) {
+      return end.getTime();
+    }
+
+    const start = new Date(job.startDate);
+    return isNaN(start.getTime()) ? 0 : start.getTime();
   }
 
   get featuredTechnologyGroups(): { category: SkillEntry['category']; label: string; technologies: string[] }[] {
