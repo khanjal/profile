@@ -50,7 +50,7 @@ const LOCAL_ICON_URLS: Record<string, string> = {
   'octopus deploy': '/icons/vendor/si-octopusdeploy.svg',
   scrum: '/icons/vendor/si-jira.svg',
   'alexa skills': '/icons/vendor/alexa.svg',
-  biztalk: '/icons/vendor/dot-net.svg',
+  biztalk: '/icons/vendor/mssql-devicon.svg',
   ssrs: '/icons/vendor/mssql-devicon.svg',
   'crystal reports': '/icons/vendor/si-sap.svg',
   svn: '/icons/vendor/si-subversion.svg',
@@ -66,7 +66,7 @@ const LOCAL_ICON_URLS: Record<string, string> = {
   xslt: '/icons/vendor/si-xml.svg',
   wsdl: '/icons/vendor/si-xml.svg',
   uml: '/icons/vendor/si-uml.svg',
-  iis: '/icons/vendor/dot-net.svg',
+  iis: '/icons/vendor/microsoft-iis.svg',
   sourcesafe: '/icons/vendor/si-git.svg',
   'node.js': '/icons/vendor/si-nodedotjs.svg'
 };
