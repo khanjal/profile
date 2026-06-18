@@ -16,6 +16,8 @@ export class ExperienceComponent {
   @Input() selectedSkillFilter: string | null = null;
   @Output() skillClicked = new EventEmitter<string>();
   private failedIconKeys = new Set<string>();
+  @Input() strongSkillUsageThreshold = 3;
+  @Input() strongSkillMaxAgeYears = 7;
 
   jobs: JobExperience[] = experiencesData as JobExperience[];
   private skillEntries: SkillEntry[] = skillsData as SkillEntry[];
@@ -31,7 +33,7 @@ export class ExperienceComponent {
     'utility'
   ];
 
-  get featuredTechnologies(): string[] {
+  private get featuredTechnologyMetrics(): Map<string, { name: string; lastUsed: number; usageCount: number; firstSeen: number }> {
     const now = Date.now();
     const metrics = new Map<string, { name: string; lastUsed: number; usageCount: number; firstSeen: number }>();
 
@@ -58,7 +60,11 @@ export class ExperienceComponent {
       });
     });
 
-    return [...metrics.values()]
+    return metrics;
+  }
+
+  get featuredTechnologies(): string[] {
+    return [...this.featuredTechnologyMetrics.values()]
       .sort((a, b) =>
         (b.lastUsed - a.lastUsed) ||
         (b.usageCount - a.usageCount) ||
@@ -66,6 +72,15 @@ export class ExperienceComponent {
         a.name.localeCompare(b.name)
       )
       .map(skill => skill.name);
+  }
+
+  isStrongTechnology(skillName: string): boolean {
+    const metrics = this.featuredTechnologyMetrics.get(skillName.toLowerCase());
+    if (!metrics) return false;
+    const now = Date.now();
+    const ageMs = now - metrics.lastUsed;
+    const maxAgeMs = this.strongSkillMaxAgeYears * 365 * 24 * 60 * 60 * 1000;
+    return metrics.usageCount >= this.strongSkillUsageThreshold && ageMs <= maxAgeMs;
   }
 
   private getJobRecencyTimestamp(job: JobExperience, now: number): number {

@@ -16,6 +16,7 @@
                     type="button"
                     class="tech-icon-chip"
                     [class.skill-selected]="selectedSkillFilter === tech"
+                    [class.tech-icon-chip-strong]="isStrongTechnology(tech)"
                     (click)="onSkillClick(tech)"
                     [attr.aria-label]="'Filter by ' + tech">
                     <span class="skill-icon-wrap" [attr.aria-label]="tech + ' icon'">

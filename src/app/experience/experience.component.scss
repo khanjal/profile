@@ -56,6 +56,20 @@
 	transform: translateY(-1px);
 }
 
+.tech-icon-chip-strong {
+	border-color: rgba(245, 158, 11, 0.52);
+	box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.14), 0 10px 22px rgba(245, 158, 11, 0.12);
+}
+
+.tech-icon-chip-strong .skill-icon-wrap {
+	border-color: rgba(251, 191, 36, 0.42);
+	box-shadow: inset 0 0 0 1px rgba(251, 191, 36, 0.14);
+}
+
+.tech-icon-chip-strong:hover {
+	border-color: rgba(251, 191, 36, 0.78);
+}
+
 .tech-icon-chip .skill-icon-wrap {
 	width: 2.45rem;
 	height: 2.45rem;
