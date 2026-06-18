@@ -1,5 +1,6 @@
 [
   { "name": "C#", "category": "language" },
+  { "name": "Python", "category": "language" },
   { "name": "JavaScript", "category": "language" },
   { "name": "TypeScript", "category": "language" },
   { "name": "Visual Basic", "category": "language" },
@@ -16,6 +17,7 @@
   { "name": "Bootstrap", "category": "framework" },
   { "name": "Tailwind", "category": "framework" },
   { "name": "AWS", "category": "cloud" },
+  { "name": "Google Cloud", "category": "cloud" },
   { "name": "Azure", "category": "cloud" },
   { "name": "Lambda", "category": "cloud", "parent": "AWS" },
   { "name": "S3", "category": "cloud", "parent": "AWS" },

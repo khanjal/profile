@@ -1,5 +1,6 @@
 const LOCAL_ICON_URLS: Record<string, string> = {
   'c#': '/icons/vendor/csharp.svg',
+  python: '/icons/vendor/python-colored.svg',
   javascript: '/icons/vendor/si-javascript.svg',
   typescript: '/icons/vendor/si-typescript.svg',
   'visual basic': '/icons/vendor/visualbasic.svg',
@@ -16,6 +17,7 @@ const LOCAL_ICON_URLS: Record<string, string> = {
   bootstrap: '/icons/vendor/si-bootstrap.svg',
   tailwind: '/icons/vendor/si-tailwindcss.svg',
   aws: '/icons/aws-official/aws.svg',
+  'google cloud': '/icons/vendor/googlecloud-colored.svg',
   azure: '/icons/vendor/azure.svg',
   lambda: '/icons/aws-official/lambda.svg',
   s3: '/icons/aws-official/s3.svg',
