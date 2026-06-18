@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import experiencesData from '@data/experiences.json';
 import skillsData from '@data/skills.json';
 import { JobExperience, SkillUsage, SkillEntry } from '@models';
+import { getSkillIconUrl, getSkillInitials } from '@app/shared/skill-icons';
 
 @Component({
   selector: 'app-experience',
@@ -14,6 +15,7 @@ import { JobExperience, SkillUsage, SkillEntry } from '@models';
 export class ExperienceComponent {
   @Input() selectedSkillFilter: string | null = null;
   @Output() skillClicked = new EventEmitter<string>();
+  private failedIconKeys = new Set<string>();
 
   jobs: JobExperience[] = experiencesData as JobExperience[];
   private skillEntries: SkillEntry[] = skillsData as SkillEntry[];
@@ -25,8 +27,47 @@ export class ExperienceComponent {
     'framework',
     'cloud',
     'database',
-    'concept'
+    'concept',
+    'utility'
   ];
+
+  get featuredTechnologies(): string[] {
+    const seen = new Set<string>();
+    const ordered: string[] = [];
+
+    this.jobs.forEach(job => {
+      job.skills.forEach(skill => {
+        const name = typeof skill === 'string' ? skill : skill.name;
+        const key = name.toLowerCase();
+        if (seen.has(key)) {
+          return;
+        }
+        seen.add(key);
+        ordered.push(name);
+      });
+    });
+
+    return ordered;
+  }
+
+  get featuredTechnologyGroups(): { category: SkillEntry['category']; label: string; technologies: string[] }[] {
+    const grouped = new Map<SkillEntry['category'], string[]>();
+
+    this.featuredTechnologies.forEach(tech => {
+      const category = this.skillCategoryMap.get(tech) || 'concept';
+      const list = grouped.get(category) || [];
+      list.push(tech);
+      grouped.set(category, list);
+    });
+
+    return this.categoryOrder
+      .map(category => ({
+        category,
+        label: this.getSnapshotCategoryLabel(category),
+        technologies: grouped.get(category) || []
+      }))
+      .filter(group => group.technologies.length > 0);
+  }
 
   shouldShowExperience(experienceSkills: SkillUsage[]): boolean {
     if (!this.selectedSkillFilter) return true;
@@ -52,6 +93,45 @@ export class ExperienceComponent {
       default:
         return 'Utilities';
     }
+  }
+
+  getSnapshotCategoryLabel(category: SkillEntry['category']): string {
+    switch (category) {
+      case 'language':
+        return 'Languages';
+      case 'framework':
+        return 'Frontend & Frameworks';
+      case 'cloud':
+        return 'Cloud';
+      case 'database':
+        return 'Data';
+      case 'concept':
+        return 'Concepts';
+      case 'utility':
+      default:
+        return 'Tools';
+    }
+  }
+
+  getCompaniesForTechnology(skillName: string): string[] {
+    const key = skillName.toLowerCase();
+    const companies = this.jobs
+      .filter(job => job.skills.some(skill => {
+        const name = typeof skill === 'string' ? skill : skill.name;
+        return name.toLowerCase() === key;
+      }))
+      .map(job => job.company);
+
+    return [...new Set(companies)];
+  }
+
+  getCompaniesPreviewForTechnology(skillName: string): string[] {
+    return this.getCompaniesForTechnology(skillName).slice(0, 6);
+  }
+
+  getAdditionalCompaniesCount(skillName: string): number {
+    const total = this.getCompaniesForTechnology(skillName).length;
+    return total > 6 ? total - 6 : 0;
   }
 
   getGroupedSkills(skills: SkillUsage[]): { category: SkillEntry['category']; skills: { name: string }[] }[] {
@@ -116,5 +196,27 @@ export class ExperienceComponent {
     const s = (typeof skill === 'string') ? job.startDate : (skill.startDate ? skill.startDate : job.startDate);
     const e = (typeof skill === 'string') ? job.endDate : ((skill.endDate !== undefined && skill.endDate !== null) ? skill.endDate : job.endDate);
     return this.calculateDuration(s, e);
+  }
+
+  iconUrl(skillName: string): string | null {
+    return getSkillIconUrl(skillName);
+  }
+
+  shouldRenderIcon(skillName: string): boolean {
+    const key = skillName.toLowerCase();
+    return this.iconUrl(skillName) !== null && !this.failedIconKeys.has(key);
+  }
+
+  iconFallback(skillName: string): string {
+    return getSkillInitials(skillName);
+  }
+
+  shouldShowIconFallback(skillName: string): boolean {
+    return !this.shouldRenderIcon(skillName);
+  }
+
+  hideBrokenIcon(skillName: string, event: Event): void {
+    this.failedIconKeys.add(skillName.toLowerCase());
+    (event.target as HTMLImageElement).style.display = 'none';
   }
 }

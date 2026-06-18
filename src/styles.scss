@@ -137,6 +137,115 @@
   .container-custom {
     @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+
+  .snapshot-group-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(148, 163, 184, 0.95);
+    margin-bottom: 0.5rem;
+  }
+
+  .tech-chip-popover {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 0.55rem);
+    transform: translateX(-50%) translateY(-2px);
+    width: 19.5rem;
+    padding: 0.7rem;
+    border-radius: 0.6rem;
+    text-align: left;
+    line-height: 1.2;
+    color: #e6f8ff;
+    background: rgba(8, 12, 20, 0.97);
+    border: 1px solid rgba(0, 217, 255, 0.34);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 30;
+    transition: opacity 0.16s ease, transform 0.16s ease;
+  }
+
+  .tech-icon-chip:hover .tech-chip-popover,
+  .tech-icon-chip:focus-visible .tech-chip-popover {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .tech-icon-chip:hover,
+  .tech-icon-chip:focus-visible {
+    z-index: 50;
+  }
+
+  .tech-chip-popover-layout {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 0.7rem;
+    align-items: start;
+  }
+
+  .tech-chip-popover-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.42rem;
+    text-align: center;
+  }
+
+  .tech-chip-popover-icon.skill-icon-wrap {
+    width: 5.1rem !important;
+    height: 5.1rem !important;
+    border-radius: 0.75rem;
+    background: rgba(241, 245, 249, 0.98);
+    border-color: rgba(15, 23, 42, 0.2);
+  }
+
+  .tech-chip-popover-icon .skill-icon-img {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0.5rem !important;
+  }
+
+  .tech-chip-popover-title {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #f4fbff;
+    max-width: 6.8rem;
+    white-space: normal;
+  }
+
+  .tech-chip-popover-right {
+    min-width: 0;
+  }
+
+  .tech-chip-popover-subtitle {
+    display: block;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(159, 239, 255, 0.9);
+    margin-bottom: 0.35rem;
+  }
+
+  .tech-chip-popover-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.24rem;
+    line-height: 1.25;
+  }
+
+  .tech-chip-popover-item {
+    display: block;
+    font-size: 0.72rem;
+    color: rgba(230, 248, 255, 0.95);
+    white-space: normal;
+  }
+
+  .tech-chip-popover-more {
+    color: rgba(159, 239, 255, 0.9);
+    font-weight: 700;
+  }
 }
 
 @layer utilities {

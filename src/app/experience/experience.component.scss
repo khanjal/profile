@@ -1,1 +1,78 @@
 // Experience component styles
+
+.skill-icon-wrap {
+	position: relative;
+	width: 1.15rem;
+	height: 1.15rem;
+	border-radius: 0.3rem;
+	border: 1px solid rgba(0, 217, 255, 0.3);
+	background: rgba(0, 217, 255, 0.08);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+.skill-icon-wrap-sm {
+	width: 1rem;
+	height: 1rem;
+}
+
+.skill-icon-fallback {
+	font-size: 0.58rem;
+	letter-spacing: 0.02em;
+	font-weight: 700;
+	color: #9fefff;
+	line-height: 1;
+}
+
+.skill-icon-img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	padding: 0.14rem;
+	background: transparent;
+}
+
+.tech-icon-chip {
+	border: 1px solid rgba(0, 217, 255, 0.2);
+	background: rgba(30, 34, 45, 0.7);
+	border-radius: 0.45rem;
+	padding: 0.6rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	line-height: 0;
+	vertical-align: middle;
+	transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.tech-icon-chip:hover {
+	border-color: rgba(0, 217, 255, 0.65);
+	transform: translateY(-1px);
+}
+
+.tech-icon-chip .skill-icon-wrap {
+	width: 2.45rem;
+	height: 2.45rem;
+	border-radius: 0.55rem;
+	border-color: rgba(15, 23, 42, 0.18);
+	background: rgba(248, 250, 252, 0.98);
+}
+
+.tech-icon-chip .skill-icon-img {
+	padding: 0.32rem;
+	object-position: center;
+}
+
+.tech-icon-chip .skill-icon-fallback {
+	font-size: 0.82rem;
+	font-weight: 800;
+	color: #0f172a;
+	letter-spacing: 0.04em;
+}
+

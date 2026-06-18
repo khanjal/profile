@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Skill } from '@models';
+import { getSkillIconUrl, getSkillInitials } from '@app/shared/skill-icons';
 
 @Component({
   selector: 'app-skills',
@@ -13,6 +14,7 @@ export class SkillsComponent {
   @Input() skills: Skill[] = [];
   @Input() selectedSkillFilter: string | null = null;
   @Output() skillFilterChanged = new EventEmitter<string | null>();
+  private failedIconKeys = new Set<string>();
 
   private categoryOrder: Skill['category'][] = [
     'language',
@@ -114,5 +116,27 @@ export class SkillsComponent {
 
   isSkillSelected(skillName: string): boolean {
     return this.selectedSkillFilter === skillName;
+  }
+
+  iconUrl(skillName: string): string | null {
+    return getSkillIconUrl(skillName);
+  }
+
+  shouldRenderIcon(skillName: string): boolean {
+    const key = skillName.toLowerCase();
+    return this.iconUrl(skillName) !== null && !this.failedIconKeys.has(key);
+  }
+
+  iconFallback(skillName: string): string {
+    return getSkillInitials(skillName);
+  }
+
+  shouldShowIconFallback(skillName: string): boolean {
+    return !this.shouldRenderIcon(skillName);
+  }
+
+  hideBrokenIcon(skillName: string, event: Event): void {
+    this.failedIconKeys.add(skillName.toLowerCase());
+    (event.target as HTMLImageElement).style.display = 'none';
   }
 }

@@ -22,6 +22,7 @@
       "GitHub Copilot",
       "Claude",
       "Visual Studio",
+      "VS Code",
       ".NET Core",
       ".NET Framework",
       "TypeScript"
@@ -50,6 +51,7 @@
       "Tailwind",
       "GitHub Copilot",
       "Visual Studio",
+      "VS Code",
       ".NET Core"
     ]
   },
@@ -100,7 +102,8 @@
       "TeamCity",
       "Octopus Deploy",
       "jQuery",
-      "Visual Studio"
+      "Visual Studio",
+      "VS Code"
     ]
   },
   {
