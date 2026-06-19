@@ -17,35 +17,14 @@
                     class="tech-icon-chip"
                     [class.skill-selected]="selectedSkillFilter === tech"
                     [class.tech-icon-chip-strong]="isStrongTechnology(tech)"
-                    (click)="onSkillClick(tech)"
+                    (click)="onChipClick(tech, $event)"
+                    (mouseenter)="showPopover($event, tech)"
+                    (mouseleave)="hidePopover()"
                     [attr.aria-label]="'Filter by ' + tech">
                     <span class="skill-icon-wrap" [attr.aria-label]="tech + ' icon'">
                       @if (iconUrl(tech); as icon) {
                         <img [src]="icon" [alt]="tech + ' icon'" class="skill-icon-img" loading="lazy" (error)="hideBrokenIcon(tech, $event)">
                       }
-                    </span>
-                    <span class="tech-chip-popover" aria-hidden="true">
-                      <span class="tech-chip-popover-layout">
-                        <span class="tech-chip-popover-left">
-                          <span class="tech-chip-popover-icon skill-icon-wrap" [attr.aria-label]="tech + ' icon preview'">
-                            @if (iconUrl(tech); as icon) {
-                              <img [src]="icon" [alt]="tech + ' icon preview'" class="skill-icon-img" loading="lazy" (error)="hideBrokenIcon(tech, $event)">
-                            }
-                          </span>
-                          <span class="tech-chip-popover-title">{{ tech }}</span>
-                        </span>
-                        <span class="tech-chip-popover-right">
-                          <span class="tech-chip-popover-subtitle">Companies</span>
-                          <span class="tech-chip-popover-list">
-                            @for (company of getCompaniesPreviewForTechnology(tech); track company) {
-                              <span class="tech-chip-popover-item">{{ company }}</span>
-                            }
-                            @if (getAdditionalCompaniesCount(tech) > 0) {
-                              <span class="tech-chip-popover-item tech-chip-popover-more">+{{ getAdditionalCompaniesCount(tech) }} more</span>
-                            }
-                          </span>
-                        </span>
-                      </span>
                     </span>
                   </button>
                 }
@@ -139,3 +118,31 @@
     </div>
   </div>
 </section>
+
+@if (activePopoverTech) {
+  <div class="tech-chip-popover tech-chip-popover-visible" aria-hidden="true"
+       [style.left]="popoverStyle.left"
+       [style.top]="popoverStyle.top">
+    <span class="tech-chip-popover-layout">
+      <span class="tech-chip-popover-left">
+        <span class="tech-chip-popover-icon skill-icon-wrap">
+          @if (iconUrl(activePopoverTech); as icon) {
+            <img [src]="icon" [alt]="activePopoverTech + ' icon'" class="skill-icon-img" loading="lazy">
+          }
+        </span>
+        <span class="tech-chip-popover-title">{{ activePopoverTech }}</span>
+      </span>
+      <span class="tech-chip-popover-right">
+        <span class="tech-chip-popover-subtitle">Companies</span>
+        <span class="tech-chip-popover-list">
+          @for (company of getCompaniesPreviewForTechnology(activePopoverTech); track company) {
+            <span class="tech-chip-popover-item">{{ company }}</span>
+          }
+          @if (getAdditionalCompaniesCount(activePopoverTech) > 0) {
+            <span class="tech-chip-popover-item tech-chip-popover-more">+{{ getAdditionalCompaniesCount(activePopoverTech) }} more</span>
+          }
+        </span>
+      </span>
+    </span>
+  </div>
+}

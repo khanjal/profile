@@ -124,7 +124,7 @@
 
   /* Timeline item */
   .timeline-item {
-    @apply relative pl-8 pb-8 border-l-2 border-accent/30;
+    @apply relative pl-5 pb-8 border-l-2 border-accent/30 sm:pl-8;
     
     &::before {
       content: '';
@@ -147,11 +147,8 @@
   }
 
   .tech-chip-popover {
-    position: absolute;
-    left: 50%;
-    top: calc(100% + 0.55rem);
-    transform: translateX(-50%) translateY(-2px);
-    width: 19.5rem;
+    position: fixed;
+    width: min(19.5rem, calc(100vw - 1rem));
     padding: 0.7rem;
     border-radius: 0.6rem;
     text-align: left;
@@ -159,16 +156,8 @@
     color: #e6f8ff;
     background: rgba(8, 12, 20, 0.97);
     border: 1px solid rgba(0, 217, 255, 0.34);
-    opacity: 0;
     pointer-events: none;
-    z-index: 30;
-    transition: opacity 0.16s ease, transform 0.16s ease;
-  }
-
-  .tech-icon-chip:hover .tech-chip-popover,
-  .tech-icon-chip:focus-visible .tech-chip-popover {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    z-index: 9999;
   }
 
   .tech-icon-chip:hover,

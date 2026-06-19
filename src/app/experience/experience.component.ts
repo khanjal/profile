@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import experiencesData from '@data/experiences.json';
 import skillsData from '@data/skills.json';
@@ -18,6 +18,8 @@ export class ExperienceComponent {
   private failedIconKeys = new Set<string>();
   @Input() strongSkillUsageThreshold = 3;
   @Input() strongSkillMaxAgeYears = 7;
+  activePopoverTech: string | null = null;
+  popoverStyle: { left: string; top: string } = { left: '0px', top: '0px' };
 
   jobs: JobExperience[] = experiencesData as JobExperience[];
   private skillEntries: SkillEntry[] = skillsData as SkillEntry[];
@@ -237,6 +239,49 @@ export class ExperienceComponent {
 
   onSkillClick(skillName: string) {
     this.skillClicked.emit(skillName);
+  }
+
+  @HostListener('document:click')
+  onDocumentClick(): void {
+    if (!window.matchMedia('(hover: hover)').matches) {
+      this.activePopoverTech = null;
+    }
+  }
+
+  onChipClick(skillName: string, event: MouseEvent): void {
+    if (!window.matchMedia('(hover: hover)').matches) {
+      event.stopPropagation();
+      if (this.activePopoverTech === skillName) {
+        this.activePopoverTech = null;
+        return;
+      }
+      const chip = event.currentTarget as HTMLElement;
+      const rect = chip.getBoundingClientRect();
+      const margin = 8;
+      const popoverWidth = Math.min(312, window.innerWidth - margin * 2);
+      let left = rect.left + rect.width / 2 - popoverWidth / 2;
+      left = Math.max(margin, Math.min(left, window.innerWidth - popoverWidth - margin));
+      this.popoverStyle = { left: `${left}px`, top: `${rect.bottom + 8}px` };
+      this.activePopoverTech = skillName;
+    }
+    this.skillClicked.emit(skillName);
+  }
+
+  showPopover(event: MouseEvent, tech: string): void {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    const chip = event.currentTarget as HTMLElement;
+    const rect = chip.getBoundingClientRect();
+    const margin = 8;
+    const popoverWidth = Math.min(312, window.innerWidth - margin * 2);
+    let left = rect.left + rect.width / 2 - popoverWidth / 2;
+    left = Math.max(margin, Math.min(left, window.innerWidth - popoverWidth - margin));
+    this.popoverStyle = { left: `${left}px`, top: `${rect.bottom + 8}px` };
+    this.activePopoverTech = tech;
+  }
+
+  hidePopover(): void {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    this.activePopoverTech = null;
   }
 
   getSkillDuration(skill: SkillUsage, job: JobExperience): string {
