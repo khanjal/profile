@@ -32,7 +32,7 @@
 .tech-snapshot-row {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.5rem;
+	gap: .75rem;
 	justify-content: space-evenly;
 
 	@media (min-width: 640px) {
