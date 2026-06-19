@@ -38,7 +38,7 @@
     
     <div class="space-y-8">
       @for (job of jobs; track job.company + job.startDate) {
-        <div class="timeline-item transition-opacity duration-300" [class.opacity-30]="!shouldShowExperience(job.skills)">
+        <div class="timeline-item transition-opacity duration-300" [class.opacity-30]="!shouldShowExperience(job)">
           <div class="card">
             <div class="flex justify-between items-start mb-4 flex-wrap gap-4">
               <!-- Desktop: logo left, company name to the right, title · type below company -->
@@ -95,6 +95,21 @@
                   </div>
                 </div>
               }
+              @if (getProjectsForCompany(job.company).length > 0) {
+                <div class="mt-4 pt-3 border-t border-gray-700">
+                  <h4 class="text-xs uppercase tracking-[0.3em] text-text-muted mb-2">Projects</h4>
+                  <div class="flex flex-wrap gap-2">
+                    @for (project of getProjectsForCompany(job.company); track project.id) {
+                      <button
+                        type="button"
+                        (click)="scrollToProject(project.id)"
+                        class="px-3 py-1 text-accent text-sm rounded border border-accent/30 hover:border-accent/70 hover:bg-accent/10 transition-all duration-200">
+                        {{ project.name }}
+                      </button>
+                    }
+                  </div>
+                </div>
+              }
               @if (getUtilitySkills(job.skills).length > 0) {
                 <div class="mt-4 pt-3 border-t border-gray-700">
                   <h4 class="text-xs uppercase tracking-[0.3em] text-text-muted mb-2">Tools & Technologies</h4>
@@ -134,22 +149,13 @@
         <span class="tech-chip-popover-title">{{ activePopoverTech }}</span>
       </span>
       <span class="tech-chip-popover-right">
-        <span class="tech-chip-popover-subtitle">Used At</span>
+        <span class="tech-chip-popover-subtitle">Companies</span>
         <span class="tech-chip-popover-list">
-          @for (usage of getUsagesPreviewForTechnology(activePopoverTech); track usage.company) {
-            <span class="tech-chip-popover-item">
-              <span class="tech-chip-popover-company">{{ usage.company }}</span>
-              @if (usage.projects.length > 0) {
-                <span class="tech-chip-popover-projects">
-                  @for (project of usage.projects; track project.id) {
-                    <button type="button" class="tech-chip-popover-project-link" (click)="scrollToProject(project.id)">{{ project.name }}</button>
-                  }
-                </span>
-              }
-            </span>
+          @for (company of getCompaniesPreviewForTechnology(activePopoverTech); track company) {
+            <span class="tech-chip-popover-item">{{ company }}</span>
           }
-          @if (getAdditionalUsagesCount(activePopoverTech) > 0) {
-            <span class="tech-chip-popover-item tech-chip-popover-more">+{{ getAdditionalUsagesCount(activePopoverTech) }} more</span>
+          @if (getAdditionalCompaniesCount(activePopoverTech) > 0) {
+            <span class="tech-chip-popover-item tech-chip-popover-more">+{{ getAdditionalCompaniesCount(activePopoverTech) }} more</span>
           }
         </span>
       </span>

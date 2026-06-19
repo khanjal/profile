@@ -8,7 +8,8 @@
          [href]="project.url"
          target="_blank"
          rel="noopener noreferrer"
-         class="card group relative overflow-hidden hover:scale-105 transition-all duration-300 block">
+         class="card group relative overflow-hidden hover:scale-105 transition-all duration-300 block"
+         [class.opacity-30]="!shouldShowProject(project)">
     
     <!-- Project Header -->
     <div class="mb-4">

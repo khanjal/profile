@@ -156,7 +156,7 @@
     color: #e6f8ff;
     background: rgba(8, 12, 20, 0.97);
     border: 1px solid rgba(0, 217, 255, 0.34);
-    pointer-events: all;
+    pointer-events: none;
     z-index: 9999;
   }
 
@@ -229,37 +229,6 @@
     font-size: 0.72rem;
     color: rgba(230, 248, 255, 0.95);
     white-space: normal;
-  }
-
-  .tech-chip-popover-company {
-    display: block;
-    font-size: 0.72rem;
-    color: rgba(230, 248, 255, 0.95);
-  }
-
-  .tech-chip-popover-projects {
-    display: flex;
-    flex-direction: column;
-    padding-left: 0.75rem;
-    border-left: 1px solid rgba(0, 217, 255, 0.2);
-    margin-top: 0.2rem;
-    margin-bottom: 0.2rem;
-    gap: 0.15rem;
-  }
-
-  .tech-chip-popover-project-link {
-    display: block;
-    font-size: 0.68rem;
-    color: rgba(0, 217, 255, 0.85);
-    text-align: left;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    pointer-events: all;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    &:hover { color: rgba(0, 217, 255, 1); }
   }
 
   .tech-chip-popover-more {

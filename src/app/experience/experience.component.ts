@@ -134,12 +134,16 @@ export class ExperienceComponent {
       .filter(group => group.technologies.length > 0);
   }
 
-  shouldShowExperience(experienceSkills: SkillUsage[]): boolean {
+  shouldShowExperience(job: JobExperience): boolean {
     if (!this.selectedSkillFilter) return true;
-    return experienceSkills.some(skill => {
+    const inSkills = job.skills.some(skill => {
       const name = typeof skill === 'string' ? skill : skill.name;
       return name === this.selectedSkillFilter;
     });
+    if (inSkills) return true;
+    return this.projects
+      .filter(p => p.company === job.company)
+      .some(p => p.tags.includes(this.selectedSkillFilter!));
   }
 
   getCategoryLabel(category: SkillEntry['category']): string {
@@ -178,51 +182,40 @@ export class ExperienceComponent {
     }
   }
 
-  getUsagesForTechnology(skillName: string): { company: string; projects: { name: string; id: string }[] }[] {
+  getCompaniesForTechnology(skillName: string): string[] {
     const key = skillName.toLowerCase();
-    const result: { company: string; projects: { name: string; id: string }[] }[] = [];
+    const fromJobs = this.jobs
+      .filter(job => {
+        const inSkills = job.skills.some(skill => {
+          const name = typeof skill === 'string' ? skill : skill.name;
+          return name.toLowerCase() === key;
+        });
+        const inProjects = this.projects
+          .filter(p => p.company === job.company)
+          .some(p => p.tags.some(t => t.toLowerCase() === key));
+        return inSkills || inProjects;
+      })
+      .map(job => job.company);
 
-    this.jobs.forEach(job => {
-      const usedInJob = job.skills.some(skill => {
-        const name = typeof skill === 'string' ? skill : skill.name;
-        return name.toLowerCase() === key;
-      });
-      if (!usedInJob) return;
-
-      const relatedProjects = this.projects
-        .filter(p => p.company === job.company && p.tags.some(t => t.toLowerCase() === key))
-        .map(p => ({ name: p.name, id: 'project-' + p.name.toLowerCase().replace(/\s+/g, '-') }));
-
-      if (!result.some(r => r.company === job.company)) {
-        result.push({ company: job.company, projects: relatedProjects });
-      }
-    });
-
-    // Also add companies only from projects (no job entry)
-    this.projects
-      .filter(p => p.tags.some(t => t.toLowerCase() === key))
-      .forEach(p => {
-        if (!result.some(r => r.company === p.company)) {
-          result.push({ company: p.company, projects: [{ name: p.name, id: 'project-' + p.name.toLowerCase().replace(/\s+/g, '-') }] });
-        }
-      });
-
-    return result;
+    return [...new Set(fromJobs)];
   }
 
-  getUsagesPreviewForTechnology(skillName: string): { company: string; projects: { name: string; id: string }[] }[] {
-    return this.getUsagesForTechnology(skillName).slice(0, 6);
+  getCompaniesPreviewForTechnology(skillName: string): string[] {
+    return this.getCompaniesForTechnology(skillName).slice(0, 6);
   }
 
-  getAdditionalUsagesCount(skillName: string): number {
-    return Math.max(0, this.getUsagesForTechnology(skillName).length - 6);
+  getAdditionalCompaniesCount(skillName: string): number {
+    return Math.max(0, this.getCompaniesForTechnology(skillName).length - 6);
+  }
+
+  getProjectsForCompany(company: string): { name: string; id: string }[] {
+    return this.projects
+      .filter(p => p.company === company)
+      .map(p => ({ name: p.name, id: 'project-' + p.name.toLowerCase().replace(/\s+/g, '-') }));
   }
 
   scrollToProject(id: string): void {
-    this.activePopoverTech = null;
-    setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 50);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   getGroupedSkills(skills: SkillUsage[]): { category: SkillEntry['category']; skills: { name: string }[] }[] {

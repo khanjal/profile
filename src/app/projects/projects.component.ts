@@ -32,8 +32,14 @@ export class ProjectsComponent implements OnInit {
   }
 
   get displayedProjects(): Project[] {
-    if (!this.selectedSkillFilter) return this.projects;
-    return this.projects.filter(p => p.tags?.includes(this.selectedSkillFilter as string));
+    return this.projects;
+  }
+
+  shouldShowProject(project: Project): boolean {
+    if (!this.selectedSkillFilter) {
+      return true;
+    }
+    return !!project.tags?.includes(this.selectedSkillFilter);
   }
 
   ngOnInit() {
