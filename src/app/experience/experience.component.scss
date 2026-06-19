@@ -29,6 +29,17 @@
 	background: transparent;
 }
 
+.tech-snapshot-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	justify-content: space-evenly;
+
+	@media (min-width: 640px) {
+		justify-content: flex-start;
+	}
+}
+
 .tech-icon-chip {
 	border: 1px solid rgba(0, 217, 255, 0.2);
 	background: rgba(30, 34, 45, 0.7);

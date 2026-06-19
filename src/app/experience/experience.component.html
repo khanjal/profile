@@ -10,7 +10,7 @@
           @for (group of featuredTechnologyGroups; track group.category) {
             <div>
               <div class="snapshot-group-label">{{ group.label }}</div>
-              <div class="flex flex-wrap gap-2">
+              <div class="tech-snapshot-row">
                 @for (tech of group.technologies; track tech) {
                   <button
                     type="button"
