@@ -77,6 +77,8 @@ export class ExperienceComponent {
   }
 
   isStrongTechnology(skillName: string): boolean {
+    const entry = this.skillEntries.find(e => e.name === skillName);
+    if (entry?.strong) return true;
     const metrics = this.featuredTechnologyMetrics.get(skillName.toLowerCase());
     if (!metrics) return false;
     const now = Date.now();

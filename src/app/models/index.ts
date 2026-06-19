@@ -13,6 +13,7 @@ export interface SkillEntry {
   name: string;
   category: Skill['category'];
   parent?: string;
+  strong?: boolean;
 }
 
 export interface JobExperience {
