@@ -286,12 +286,6 @@ export class ExperienceComponent {
     this.activePopoverTech = null;
   }
 
-  getSkillDuration(skill: SkillUsage, job: JobExperience): string {
-    const s = (typeof skill === 'string') ? job.startDate : (skill.startDate ? skill.startDate : job.startDate);
-    const e = (typeof skill === 'string') ? job.endDate : ((skill.endDate !== undefined && skill.endDate !== null) ? skill.endDate : job.endDate);
-    return this.calculateDuration(s, e);
-  }
-
   iconUrl(skillName: string): string | null {
     return getSkillIconUrl(skillName);
   }
