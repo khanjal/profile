@@ -62,6 +62,18 @@
 	border-color: rgba(251, 191, 36, 0.78);
 }
 
+.tech-icon-chip.skill-selected {
+	border-color: rgba(0, 217, 255, 0.9);
+	background: rgba(0, 217, 255, 0.15);
+	box-shadow: 0 0 0 1px rgba(0, 217, 255, 0.3), 0 0 12px rgba(0, 217, 255, 0.2);
+	transform: translateY(-1px);
+}
+
+.tech-icon-chip.skill-selected .skill-icon-wrap {
+	border-color: rgba(0, 217, 255, 0.6);
+	background: rgba(0, 217, 255, 0.12);
+}
+
 .tech-icon-chip .skill-icon-wrap {
 	width: 2.45rem;
 	height: 2.45rem;
