@@ -19,14 +19,6 @@
 	height: 1rem;
 }
 
-.skill-icon-fallback {
-	font-size: 0.58rem;
-	letter-spacing: 0.02em;
-	font-weight: 700;
-	color: #9fefff;
-	line-height: 1;
-}
-
 .skill-icon-img {
 	position: absolute;
 	inset: 0;
@@ -81,12 +73,5 @@
 .tech-icon-chip .skill-icon-img {
 	padding: 0.32rem;
 	object-position: center;
-}
-
-.tech-icon-chip .skill-icon-fallback {
-	font-size: 0.82rem;
-	font-weight: 800;
-	color: #f8fafc;
-	letter-spacing: 0.04em;
 }
 

@@ -20,10 +20,7 @@
                     (click)="onSkillClick(tech)"
                     [attr.aria-label]="'Filter by ' + tech">
                     <span class="skill-icon-wrap" [attr.aria-label]="tech + ' icon'">
-                      @if (shouldShowIconFallback(tech)) {
-                        <span class="skill-icon-fallback">{{ iconFallback(tech) }}</span>
-                      }
-                      @if (shouldRenderIcon(tech) && iconUrl(tech); as icon) {
+                      @if (iconUrl(tech); as icon) {
                         <img [src]="icon" [alt]="tech + ' icon'" class="skill-icon-img" loading="lazy" (error)="hideBrokenIcon(tech, $event)">
                       }
                     </span>
@@ -31,10 +28,7 @@
                       <span class="tech-chip-popover-layout">
                         <span class="tech-chip-popover-left">
                           <span class="tech-chip-popover-icon skill-icon-wrap" [attr.aria-label]="tech + ' icon preview'">
-                            @if (shouldShowIconFallback(tech)) {
-                              <span class="skill-icon-fallback">{{ iconFallback(tech) }}</span>
-                            }
-                            @if (shouldRenderIcon(tech) && iconUrl(tech); as icon) {
+                            @if (iconUrl(tech); as icon) {
                               <img [src]="icon" [alt]="tech + ' icon preview'" class="skill-icon-img" loading="lazy" (error)="hideBrokenIcon(tech, $event)">
                             }
                           </span>
@@ -110,10 +104,7 @@
                         [class.skill-selected]="selectedSkillFilter === skill.name">
                         <span class="inline-flex items-center gap-2">
                           <span class="skill-icon-wrap" [attr.aria-label]="skill.name + ' icon'">
-                            @if (shouldShowIconFallback(skill.name)) {
-                              <span class="skill-icon-fallback">{{ iconFallback(skill.name) }}</span>
-                            }
-                            @if (shouldRenderIcon(skill.name) && iconUrl(skill.name); as icon) {
+                            @if (iconUrl(skill.name); as icon) {
                               <img [src]="icon" [alt]="skill.name + ' icon'" class="skill-icon-img" loading="lazy" (error)="hideBrokenIcon(skill.name, $event)">
                             }
                           </span>
@@ -131,10 +122,7 @@
                     @for (tool of getUtilitySkills(job.skills); track tool) {
                       <span class="px-3 py-1 bg-gray-800 text-text-secondary text-sm rounded border border-gray-700 inline-flex items-center gap-2">
                         <span class="skill-icon-wrap skill-icon-wrap-sm" [attr.aria-label]="tool + ' icon'">
-                          @if (shouldShowIconFallback(tool)) {
-                            <span class="skill-icon-fallback">{{ iconFallback(tool) }}</span>
-                          }
-                          @if (shouldRenderIcon(tool) && iconUrl(tool); as icon) {
+                          @if (iconUrl(tool); as icon) {
                             <img [src]="icon" [alt]="tool + ' icon'" class="skill-icon-img" loading="lazy" (error)="hideBrokenIcon(tool, $event)">
                           }
                         </span>

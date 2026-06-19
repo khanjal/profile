@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import projectsData from '../data/projects.json';
+import { getSkillIconUrl } from '@app/shared/skill-icons';
 
 interface Project {
   name: string;
@@ -22,6 +23,13 @@ interface Project {
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
   @Input() selectedSkillFilter?: string | null;
+  private failedIconKeys = new Set<string>();
+
+  iconUrl(name: string): string | null { return getSkillIconUrl(name); }
+  hideBrokenIcon(name: string, event: Event): void {
+    this.failedIconKeys.add(name.toLowerCase());
+    (event.target as HTMLImageElement).style.display = 'none';
+  }
 
   get displayedProjects(): Project[] {
     if (!this.selectedSkillFilter) return this.projects;

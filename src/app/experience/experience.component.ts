@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import experiencesData from '@data/experiences.json';
 import skillsData from '@data/skills.json';
 import { JobExperience, SkillUsage, SkillEntry } from '@models';
-import { getSkillIconUrl, getSkillInitials } from '@app/shared/skill-icons';
+import { getSkillIconUrl } from '@app/shared/skill-icons';
 
 @Component({
   selector: 'app-experience',
@@ -247,19 +247,6 @@ export class ExperienceComponent {
 
   iconUrl(skillName: string): string | null {
     return getSkillIconUrl(skillName);
-  }
-
-  shouldRenderIcon(skillName: string): boolean {
-    const key = skillName.toLowerCase();
-    return this.iconUrl(skillName) !== null && !this.failedIconKeys.has(key);
-  }
-
-  iconFallback(skillName: string): string {
-    return getSkillInitials(skillName);
-  }
-
-  shouldShowIconFallback(skillName: string): boolean {
-    return !this.shouldRenderIcon(skillName);
   }
 
   hideBrokenIcon(skillName: string, event: Event): void {
