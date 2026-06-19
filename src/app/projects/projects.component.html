@@ -4,6 +4,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <a *ngFor="let project of displayedProjects"
+         [id]="projectId(project.name)"
          [href]="project.url"
          target="_blank"
          rel="noopener noreferrer"

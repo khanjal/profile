@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, HostListener } from '@angular/c
 import { CommonModule } from '@angular/common';
 import experiencesData from '@data/experiences.json';
 import skillsData from '@data/skills.json';
+import projectsData from '../data/projects.json';
 import { JobExperience, SkillUsage, SkillEntry } from '@models';
 import { getSkillIconUrl } from '@app/shared/skill-icons';
 
@@ -22,6 +23,7 @@ export class ExperienceComponent {
   popoverStyle: { left: string; top: string } = { left: '0px', top: '0px' };
 
   jobs: JobExperience[] = experiencesData as JobExperience[];
+  private projects = projectsData;
   private skillEntries: SkillEntry[] = skillsData as SkillEntry[];
   private skillCategoryMap = new Map(
     this.skillEntries.map(entry => [entry.name, entry.category])
@@ -59,6 +61,18 @@ export class ExperienceComponent {
           usageCount: 1,
           firstSeen: (jobIndex * 1000) + skillIndex
         });
+      });
+    });
+
+    this.projects.forEach(project => {
+      project.tags.forEach(tag => {
+        const key = tag.toLowerCase();
+        const existing = metrics.get(key);
+        if (existing) {
+          existing.usageCount += 1;
+        } else {
+          metrics.set(key, { name: tag, lastUsed: now, usageCount: 1, firstSeen: 999999 });
+        }
       });
     });
 
@@ -164,25 +178,51 @@ export class ExperienceComponent {
     }
   }
 
-  getCompaniesForTechnology(skillName: string): string[] {
+  getUsagesForTechnology(skillName: string): { company: string; projects: { name: string; id: string }[] }[] {
     const key = skillName.toLowerCase();
-    const companies = this.jobs
-      .filter(job => job.skills.some(skill => {
+    const result: { company: string; projects: { name: string; id: string }[] }[] = [];
+
+    this.jobs.forEach(job => {
+      const usedInJob = job.skills.some(skill => {
         const name = typeof skill === 'string' ? skill : skill.name;
         return name.toLowerCase() === key;
-      }))
-      .map(job => job.company);
+      });
+      if (!usedInJob) return;
 
-    return [...new Set(companies)];
+      const relatedProjects = this.projects
+        .filter(p => p.company === job.company && p.tags.some(t => t.toLowerCase() === key))
+        .map(p => ({ name: p.name, id: 'project-' + p.name.toLowerCase().replace(/\s+/g, '-') }));
+
+      if (!result.some(r => r.company === job.company)) {
+        result.push({ company: job.company, projects: relatedProjects });
+      }
+    });
+
+    // Also add companies only from projects (no job entry)
+    this.projects
+      .filter(p => p.tags.some(t => t.toLowerCase() === key))
+      .forEach(p => {
+        if (!result.some(r => r.company === p.company)) {
+          result.push({ company: p.company, projects: [{ name: p.name, id: 'project-' + p.name.toLowerCase().replace(/\s+/g, '-') }] });
+        }
+      });
+
+    return result;
   }
 
-  getCompaniesPreviewForTechnology(skillName: string): string[] {
-    return this.getCompaniesForTechnology(skillName).slice(0, 6);
+  getUsagesPreviewForTechnology(skillName: string): { company: string; projects: { name: string; id: string }[] }[] {
+    return this.getUsagesForTechnology(skillName).slice(0, 6);
   }
 
-  getAdditionalCompaniesCount(skillName: string): number {
-    const total = this.getCompaniesForTechnology(skillName).length;
-    return total > 6 ? total - 6 : 0;
+  getAdditionalUsagesCount(skillName: string): number {
+    return Math.max(0, this.getUsagesForTechnology(skillName).length - 6);
+  }
+
+  scrollToProject(id: string): void {
+    this.activePopoverTech = null;
+    setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
   }
 
   getGroupedSkills(skills: SkillUsage[]): { category: SkillEntry['category']; skills: { name: string }[] }[] {
@@ -248,6 +288,11 @@ export class ExperienceComponent {
     if (!window.matchMedia('(hover: hover)').matches) {
       this.activePopoverTech = null;
     }
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
+    this.activePopoverTech = null;
   }
 
   onChipClick(skillName: string, event: MouseEvent): void {

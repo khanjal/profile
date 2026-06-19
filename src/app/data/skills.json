@@ -66,5 +66,7 @@
   { "name": "UML", "category": "concept" },
   { "name": "IIS", "category": "utility" },
   { "name": "SourceSafe", "category": "utility" },
+  { "name": "Google Sheets API", "category": "utility" },
+  { "name": "NuGet", "category": "utility" },
   { "name": "Node.js", "category": "utility" }
 ]

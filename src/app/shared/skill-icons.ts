@@ -66,7 +66,9 @@ const LOCAL_ICON_URLS: Record<string, string> = {
   uml: '/icons/vendor/si-uml.svg',
   iis: '/icons/vendor/microsoft-iis.svg',
   sourcesafe: '/icons/vendor/si-git.svg',
-  'node.js': '/icons/vendor/si-nodedotjs.svg'
+  'node.js': '/icons/vendor/si-nodedotjs.svg',
+  'google sheets api': '/icons/vendor/google-sheets.svg',
+  nuget: '/icons/vendor/nuget.png'
 };
 
 function normalizeSkillName(skillName: string): string {

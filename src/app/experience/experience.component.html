@@ -134,13 +134,22 @@
         <span class="tech-chip-popover-title">{{ activePopoverTech }}</span>
       </span>
       <span class="tech-chip-popover-right">
-        <span class="tech-chip-popover-subtitle">Companies</span>
+        <span class="tech-chip-popover-subtitle">Used At</span>
         <span class="tech-chip-popover-list">
-          @for (company of getCompaniesPreviewForTechnology(activePopoverTech); track company) {
-            <span class="tech-chip-popover-item">{{ company }}</span>
+          @for (usage of getUsagesPreviewForTechnology(activePopoverTech); track usage.company) {
+            <span class="tech-chip-popover-item">
+              <span class="tech-chip-popover-company">{{ usage.company }}</span>
+              @if (usage.projects.length > 0) {
+                <span class="tech-chip-popover-projects">
+                  @for (project of usage.projects; track project.id) {
+                    <button type="button" class="tech-chip-popover-project-link" (click)="scrollToProject(project.id)">{{ project.name }}</button>
+                  }
+                </span>
+              }
+            </span>
           }
-          @if (getAdditionalCompaniesCount(activePopoverTech) > 0) {
-            <span class="tech-chip-popover-item tech-chip-popover-more">+{{ getAdditionalCompaniesCount(activePopoverTech) }} more</span>
+          @if (getAdditionalUsagesCount(activePopoverTech) > 0) {
+            <span class="tech-chip-popover-item tech-chip-popover-more">+{{ getAdditionalUsagesCount(activePopoverTech) }} more</span>
           }
         </span>
       </span>

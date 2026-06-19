@@ -39,4 +39,8 @@ export class ProjectsComponent implements OnInit {
   ngOnInit() {
     this.projects = projectsData;
   }
+
+  projectId(name: string): string {
+    return 'project-' + name.toLowerCase().replace(/\s+/g, '-');
+  }
 }
