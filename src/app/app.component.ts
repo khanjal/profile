@@ -12,6 +12,11 @@ import { HeaderComponent } from './header/header.component';
 export class AppComponent {
   title = 'profile-site';
   showBackToTop = signal(false);
+  selectedSkill = signal<string | null>(null);
+
+  clearSkill() {
+    this.selectedSkill.set(null);
+  }
 
   // Intercept in-page anchor clicks site-wide and perform a smooth scroll
   @HostListener('document:click', ['$event'])
