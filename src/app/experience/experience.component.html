@@ -71,7 +71,7 @@
               </div>
             </div>
             <div class="mt-4 space-y-4">
-              @for (group of getGroupedSkills(job.skills); track group.category) {
+              @for (group of getGroupedSkills(getSkillsForJob(job)); track group.category) {
                 <div>
                   <div class="text-xs uppercase tracking-[0.3em] text-text-muted mb-2">
                     {{ getCategoryLabel(group.category) }}
@@ -110,11 +110,11 @@
                   </div>
                 </div>
               }
-              @if (getUtilitySkills(job.skills).length > 0) {
+              @if (getUtilitySkills(getSkillsForJob(job)).length > 0) {
                 <div class="mt-4 pt-3 border-t border-gray-700">
                   <h4 class="text-xs uppercase tracking-[0.3em] text-text-muted mb-2">Tools & Technologies</h4>
                   <div class="flex flex-wrap gap-2">
-                    @for (tool of getUtilitySkills(job.skills); track tool) {
+                    @for (tool of getUtilitySkills(getSkillsForJob(job)); track tool) {
                       <span class="px-3 py-1 bg-gray-800 text-text-secondary text-sm rounded border border-gray-700 inline-flex items-center gap-2">
                         <span class="skill-icon-wrap skill-icon-wrap-sm" [attr.aria-label]="tool + ' icon'">
                           @if (iconUrl(tool); as icon) {

@@ -245,6 +245,23 @@ export class ExperienceComponent {
       .filter(name => this.skillCategoryMap.get(name) === 'utility');
   }
 
+  getSkillsForJob(job: JobExperience): SkillUsage[] {
+    const jobSkillNames = new Set(job.skills.map(s => typeof s === 'string' ? s : s.name));
+    const combinedSkills: SkillUsage[] = [...job.skills];
+
+    this.projects
+      .filter(p => p.company === job.company)
+      .flatMap(p => p.tags)
+      .forEach(tag => {
+        if (!jobSkillNames.has(tag)) {
+          jobSkillNames.add(tag);
+          combinedSkills.push(tag);
+        }
+      });
+
+    return combinedSkills;
+  }
+
   calculateDuration(startDate: string, endDate: string | null): string {
     const start = new Date(startDate);
     const end = endDate ? new Date(endDate) : new Date();
@@ -274,6 +291,10 @@ export class ExperienceComponent {
 
   onSkillClick(skillName: string) {
     this.skillClicked.emit(skillName);
+  }
+
+  clearSkillFilter() {
+    this.skillClicked.emit('');
   }
 
   @HostListener('document:click')
