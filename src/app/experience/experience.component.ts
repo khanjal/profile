@@ -5,11 +5,12 @@ import skillsData from '@data/skills.json';
 import projectsData from '../data/projects.json';
 import { JobExperience, SkillUsage, SkillEntry } from '@models';
 import { getSkillIconUrl } from '@app/shared/skill-icons';
+import { DurationPipe } from '@app/shared/duration.pipe';
 
 @Component({
   selector: 'app-experience',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DurationPipe],
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.scss']
 })
@@ -260,23 +261,6 @@ export class ExperienceComponent {
       });
 
     return combinedSkills;
-  }
-
-  calculateDuration(startDate: string, endDate: string | null): string {
-    const start = new Date(startDate);
-    const end = endDate ? new Date(endDate) : new Date();
-    
-    let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-    const years = Math.floor(months / 12);
-    months = months % 12;
-
-    if (years === 0) {
-      return months === 1 ? '1 month' : `${months} months`;
-    }
-    if (months === 0) {
-      return years === 1 ? '1 year' : `${years} years`;
-    }
-    return `${years} yr${years > 1 ? 's' : ''} ${months} mo${months > 1 ? 's' : ''}`;
   }
 
   formatDateRange(job: JobExperience): string {

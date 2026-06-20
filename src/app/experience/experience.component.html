@@ -21,7 +21,7 @@
                     (mouseenter)="showPopover($event, tech)"
                     (mouseleave)="hidePopover()"
                     [attr.aria-label]="'Filter by ' + tech">
-                    <span class="skill-icon-wrap" [attr.aria-label]="tech + ' icon'">
+                    <span class="skill-icon-wrap" [class.skill-icon-wrap-strong]="isStrongTechnology(tech)" [attr.aria-label]="tech + ' icon'">
                       @if (iconUrl(tech); as icon) {
                         <img [src]="icon" [alt]="tech + ' icon'" class="skill-icon-img" loading="lazy" (error)="hideBrokenIcon(tech, $event)">
                       }
@@ -67,7 +67,7 @@
               </div>
               <div class="text-text-muted text-right">
                 <div>{{ formatDateRange(job) }}</div>
-                <div class="text-xs text-text-muted/70">{{ calculateDuration(job.startDate, job.endDate) }}</div>
+                <div class="text-xs text-text-muted/70">{{ job.startDate | duration:job.endDate }}</div>
               </div>
             </div>
             <div class="mt-4 space-y-4">
@@ -141,7 +141,7 @@
        [style.top]="popoverStyle.top">
     <span class="tech-chip-popover-layout">
       <span class="tech-chip-popover-left">
-        <span class="tech-chip-popover-icon skill-icon-wrap">
+        <span class="tech-chip-popover-icon skill-icon-wrap" [class.skill-icon-wrap-strong]="isStrongTechnology(activePopoverTech)">
           @if (iconUrl(activePopoverTech); as icon) {
             <img [src]="icon" [alt]="activePopoverTech + ' icon'" class="skill-icon-img" loading="lazy">
           }
@@ -154,8 +154,8 @@
           @for (company of getCompaniesPreviewForTechnology(activePopoverTech); track company) {
             <span class="tech-chip-popover-item">{{ company }}</span>
           }
-          @if (getAdditionalCompaniesCount(activePopoverTech) > 0) {
-            <span class="tech-chip-popover-item tech-chip-popover-more">+{{ getAdditionalCompaniesCount(activePopoverTech) }} more</span>
+          @if (getAdditionalCompaniesCount(activePopoverTech); as count) {
+            <span class="tech-chip-popover-item tech-chip-popover-more">+{{ count }} more</span>
           }
         </span>
       </span>
