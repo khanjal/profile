@@ -1,7 +1,7 @@
 <!-- Experience Section -->
 <section id="experience" class="section">
   <div class="container-custom">
-    <h2 class="section-title mb-12">Experiences</h2>
+    <h2 class="section-title mb-12">Experience</h2>
 
     @if (featuredTechnologyGroups.length > 0) {
       <div class="mb-10 card">
@@ -161,4 +161,16 @@
       </span>
     </span>
   </div>
+}
+
+@if (selectedSkillFilter) {
+  <button
+    (click)="clearSkillFilter()"
+    aria-label="Clear skill filter"
+    class="fixed bottom-6 left-6 bg-accent text-primary px-4 h-12 rounded-full flex items-center justify-center shadow-glow hover:scale-105 transition-transform z-50">
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+    <span>Clear Filter</span>
+  </button>
 }
