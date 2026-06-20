@@ -310,12 +310,18 @@ export class ExperienceComponent {
   }
 
   onChipClick(skillName: string, event: MouseEvent): void {
+    // On non-hover devices (mobile), manage popover and selection state together.
     if (!window.matchMedia('(hover: hover)').matches) {
       event.stopPropagation();
-      if (this.activePopoverTech === skillName) {
+
+      // If the clicked skill is already active, deselect it and hide the popover.
+      if (this.selectedSkillFilter === skillName) {
         this.activePopoverTech = null;
-        return;
+        this.clearSkillFilter(); // Deselect skill
+        return; // Stop further execution
       }
+
+      // Otherwise, select the skill and show the popover.
       const chip = event.currentTarget as HTMLElement;
       const rect = chip.getBoundingClientRect();
       const margin = 8;
@@ -325,6 +331,9 @@ export class ExperienceComponent {
       this.popoverStyle = { left: `${left}px`, top: `${rect.bottom + 8}px` };
       this.activePopoverTech = skillName;
     }
+
+    // For all devices, emit the skill click to filter the experiences.
+    // On mobile, this selects the new skill. On desktop, it just filters.
     this.skillClicked.emit(skillName);
   }
 
