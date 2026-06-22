@@ -11,22 +11,22 @@
             <div>
               <div class="snapshot-group-label">{{ group.label }}</div>
               <div class="tech-snapshot-row">
-                @for (tech of group.technologies; track tech) {
+                @for (tech of group.technologies; track tech.name) {
                   <button
                     type="button"
                     class="tech-icon-chip"
-                    [class.skill-selected]="selectedSkillFilter === tech"
-                    [class.tech-icon-chip-strong]="isStrongTechnology(tech)"
-                    (click)="onChipClick(tech, $event)"
+                    [class.skill-selected]="selectedSkillFilter === tech.name"
+                    [class.tech-icon-chip-strong]="tech.isStrong"
+                    (click)="onChipClick(tech.name, $event)"
                     (mouseenter)="showPopover($event, tech)"
                     (mouseleave)="hidePopover()"
-                    [attr.aria-label]="'Filter by ' + tech">
-                    <span class="skill-icon-wrap" [class.skill-icon-wrap-strong]="isStrongTechnology(tech)" [attr.aria-label]="tech + ' icon'">
-                      @if (iconUrl(tech); as icon) {
-                        <img [src]="icon" [alt]="tech + ' icon'" class="skill-icon-img" loading="lazy" (error)="hideBrokenIcon(tech, $event)">
+                    [attr.aria-label]="'Filter by ' + tech.name">
+                    <span class="skill-icon-wrap" [class.skill-icon-wrap-strong]="tech.isStrong" [attr.aria-label]="tech.name + ' icon'">
+                      @if (iconUrl(tech.name); as icon) {
+                        <img [src]="icon" [alt]="tech.name + ' icon'" class="skill-icon-img" loading="lazy" (error)="hideBrokenIcon(tech.name, $event)">
                       }
                     </span>
-                    <span class="tech-icon-chip-label">{{ tech }}</span>
+                    <span class="tech-icon-chip-label">{{ tech.name }}</span>
                   </button>
                 }
               </div>
@@ -141,20 +141,20 @@
        [style.top]="popoverStyle.top">
     <span class="tech-chip-popover-layout">
       <span class="tech-chip-popover-left">
-        <span class="tech-chip-popover-icon skill-icon-wrap" [class.skill-icon-wrap-strong]="isStrongTechnology(activePopoverTech)">
-          @if (iconUrl(activePopoverTech); as icon) {
-            <img [src]="icon" [alt]="activePopoverTech + ' icon'" class="skill-icon-img" loading="lazy">
+        <span class="tech-chip-popover-icon skill-icon-wrap" [class.skill-icon-wrap-strong]="activePopoverTech.isStrong">
+          @if (iconUrl(activePopoverTech.name); as icon) {
+            <img [src]="icon" [alt]="activePopoverTech.name + ' icon'" class="skill-icon-img" loading="lazy">
           }
         </span>
-        <span class="tech-chip-popover-title">{{ activePopoverTech }}</span>
+        <span class="tech-chip-popover-title">{{ activePopoverTech.name }}</span>
       </span>
       <span class="tech-chip-popover-right">
         <span class="tech-chip-popover-subtitle">Companies</span>
         <span class="tech-chip-popover-list">
-          @for (company of getCompaniesPreviewForTechnology(activePopoverTech); track company) {
+          @for (company of getCompaniesPreviewForTechnology(activePopoverTech.name); track company) {
             <span class="tech-chip-popover-item">{{ company }}</span>
           }
-          @if (getAdditionalCompaniesCount(activePopoverTech); as count) {
+          @if (getAdditionalCompaniesCount(activePopoverTech.name); as count) {
             <span class="tech-chip-popover-item tech-chip-popover-more">+{{ count }} more</span>
           }
         </span>

@@ -7,6 +7,11 @@ import { JobExperience, SkillUsage, SkillEntry } from '@models';
 import { getSkillIconUrl } from '@app/shared/skill-icons';
 import { DurationPipe } from '@app/shared/duration.pipe';
 
+interface FeaturedTechnology {
+  name: string;
+  isStrong: boolean;
+}
+
 @Component({
   selector: 'app-experience',
   standalone: true,
@@ -20,7 +25,7 @@ export class ExperienceComponent {
   private failedIconKeys = new Set<string>();
   @Input() strongSkillUsageThreshold = 3;
   @Input() strongSkillMaxAgeYears = 7;
-  activePopoverTech: string | null = null;
+  activePopoverTech: FeaturedTechnology | null = null;
   popoverStyle: { left: string; top: string } = { left: '0px', top: '0px' };
 
   jobs: JobExperience[] = experiencesData as JobExperience[];
@@ -80,26 +85,25 @@ export class ExperienceComponent {
     return metrics;
   }
 
-  get featuredTechnologies(): string[] {
-    return [...this.featuredTechnologyMetrics.values()]
+  get featuredTechnologies(): FeaturedTechnology[] {
+    const metrics = this.featuredTechnologyMetrics;
+    const now = Date.now();
+    const maxAgeMs = this.strongSkillMaxAgeYears * 365 * 24 * 60 * 60 * 1000;
+
+    return [...metrics.values()]
       .sort((a, b) =>
         (b.lastUsed - a.lastUsed) ||
         (b.usageCount - a.usageCount) ||
         (a.firstSeen - b.firstSeen) ||
         a.name.localeCompare(b.name)
       )
-      .map(skill => skill.name);
-  }
-
-  isStrongTechnology(skillName: string): boolean {
-    const entry = this.skillEntries.find(e => e.name === skillName);
-    if (entry?.strong) return true;
-    const metrics = this.featuredTechnologyMetrics.get(skillName.toLowerCase());
-    if (!metrics) return false;
-    const now = Date.now();
-    const ageMs = now - metrics.lastUsed;
-    const maxAgeMs = this.strongSkillMaxAgeYears * 365 * 24 * 60 * 60 * 1000;
-    return metrics.usageCount >= this.strongSkillUsageThreshold && ageMs <= maxAgeMs;
+      .map(metric => {
+        const entry = this.skillEntries.find(e => e.name === metric.name);
+        const ageMs = now - metric.lastUsed;
+        const isStrong = (entry?.strong === true) ||
+          (metric.usageCount >= this.strongSkillUsageThreshold && ageMs <= maxAgeMs);
+        return { name: metric.name, isStrong };
+      });
   }
 
   private getJobRecencyTimestamp(job: JobExperience, now: number): number {
@@ -116,11 +120,11 @@ export class ExperienceComponent {
     return isNaN(start.getTime()) ? 0 : start.getTime();
   }
 
-  get featuredTechnologyGroups(): { category: SkillEntry['category']; label: string; technologies: string[] }[] {
-    const grouped = new Map<SkillEntry['category'], string[]>();
+  get featuredTechnologyGroups(): { category: SkillEntry['category']; label: string; technologies: FeaturedTechnology[] }[] {
+    const grouped = new Map<SkillEntry['category'], FeaturedTechnology[]>();
 
     this.featuredTechnologies.forEach(tech => {
-      const category = this.skillCategoryMap.get(tech) || 'concept';
+      const category = this.skillCategoryMap.get(tech.name) || 'concept';
       const list = grouped.get(category) || [];
       list.push(tech);
       grouped.set(category, list);
@@ -313,7 +317,7 @@ export class ExperienceComponent {
       let left = rect.left + rect.width / 2 - popoverWidth / 2;
       left = Math.max(margin, Math.min(left, window.innerWidth - popoverWidth - margin));
       this.popoverStyle = { left: `${left}px`, top: `${rect.bottom + 8}px` };
-      this.activePopoverTech = skillName;
+      this.activePopoverTech = this.featuredTechnologies.find(t => t.name === skillName) ?? null;
     }
 
     // For all devices, emit the skill click to filter the experiences.
@@ -321,7 +325,7 @@ export class ExperienceComponent {
     this.skillClicked.emit(skillName);
   }
 
-  showPopover(event: MouseEvent, tech: string): void {
+  showPopover(event: MouseEvent, tech: FeaturedTechnology): void {
     if (!window.matchMedia('(hover: hover)').matches) return;
     const chip = event.currentTarget as HTMLElement;
     const rect = chip.getBoundingClientRect();
